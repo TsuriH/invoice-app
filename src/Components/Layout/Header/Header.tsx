@@ -7,9 +7,12 @@ export function Header(): JSX.Element {
 
     return (
         <div className="Header">
-            <div className="logo-container">
-                <img src={logo} alt="" />
+            <div className="logo-area">
+                <div className="logo-container">
+                    <img src={logo} alt="" />
+                </div>
             </div>
+
             <div className="color-mode">
                 <img src={moon} alt="" />
             </div>

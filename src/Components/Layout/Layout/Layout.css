@@ -1,16 +1,27 @@
 .Layout {
     height: 100%;
-    background-color: blue;
     display: flex;
     flex-direction: column;
+    background-color: var(--Dark-navy-blue);
 }
 
 .Layout main {
-    border: 5px solid red;
     flex: 1;
 
 }
 
 .Layout .spacer {
     display: none;
+}
+
+@media (min-width:1024px){
+    .Layout {
+        flex-direction: row;
+    }
+    .Layout .spacer {
+        display: block;
+        visibility: hidden;
+    }
+
+
 }
