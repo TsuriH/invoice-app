@@ -2,7 +2,7 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    background-color: var(--Dark-navy-blue);
+    background-color: var(--very-light-grey);
 }
 
 .Layout main {
