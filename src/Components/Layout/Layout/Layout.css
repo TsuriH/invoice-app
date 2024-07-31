@@ -14,14 +14,16 @@
     display: none;
 }
 
-@media (min-width:1024px){
+@media (min-width: 1024px) {
     .Layout {
         flex-direction: row;
     }
+
     .Layout .spacer {
         display: block;
         visibility: hidden;
     }
 
-
 }
+
+
