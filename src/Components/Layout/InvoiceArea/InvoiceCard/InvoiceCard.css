@@ -1,4 +1,4 @@
-.Invoice {
+.InvoiceCard {
     background: white;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -9,60 +9,60 @@
     border-radius: 1rem;
 }
 
-.Invoice .invoice-id span,
-.Invoice .date-created,
-.Invoice .customer-name {
+.InvoiceCard .invoice-card-id span,
+.InvoiceCard .date-created,
+.InvoiceCard .customer-name {
     color: var(--grayish-lavender)
 }
 
-.Invoice .invoice-id {
+.InvoiceCard .invoice-card-id {
     font-weight: bold;
 
 }
 
-.Invoice .date-created {
+.InvoiceCard .date-created {
     grid-column: 1/1;
     grid-row: 2/3;
     align-self: flex-end;
 }
 
-.Invoice .invoice-price {
+.InvoiceCard .invoice-card-price {
     grid-column: 1/1;
     grid-row: 3/4;
     align-self: flex-start;
     margin-top: 0.5rem;
 }
 
-.Invoice .status {
+.InvoiceCard .status {
     grid-column: 2/3;
     grid-row: 2/4;
     justify-self: flex-end
 }
 
-.Invoice .customer-name {
+.InvoiceCard .customer-name {
     justify-self: flex-end
 }
 
-.Invoice .invoice-price {
+.InvoiceCard .invoice-card-price {
     font-weight: bold;
 }
 
-.Invoice .right-chevron {
+.InvoiceCard .right-chevron {
     display: none;
 }
 
-.Invoice .invoice-basic-info {
+.InvoiceCard .invoice-basic-info {
     display: flex;
     justify-content: space-between;
 }
 
-.Invoice .payment-details {
+.InvoiceCard .payment-details {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.Invoice .status {
+.InvoiceCard .status {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -77,27 +77,27 @@
 
 @media (min-width: 577px) {
 
-    .Invoice {
+    .InvoiceCard {
         display: flex;
         align-items: center;
         justify-content: space-between;
         font-size: var(--font-size-small)
     }
 
-    .Invoice .right-chevron {
+    .InvoiceCard .right-chevron {
         display: block;
     }
 
-    .Invoice .status {
+    .InvoiceCard .status {
         width: fit-content;
     }
 
-    .Invoice .invoice-price {
+    .InvoiceCard .invoice-card-price {
         align-self: center;
         margin-top: 0rem;
     }
 
-    .Invoice .date-created {
+    .InvoiceCard .date-created {
         align-self: center;
     }
 

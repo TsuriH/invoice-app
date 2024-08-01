@@ -1,0 +1,83 @@
+.AddInvoice {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.AddInvoice .back-btn {
+    align-self: flex-start;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    background: none;
+    border: none;
+    font-weight: 900;
+    margin-bottom: 2rem;
+}
+
+
+.AddInvoice .status-box {
+    background-color: white;
+    border-radius: 5px;
+    padding: 3rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.AddInvoice .status-container,
+.AddInvoice .invoice-actions,
+.AddInvoice .status-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.AddInvoice .status-container {
+    width: 100%;
+    justify-content: space-between;
+}
+
+.AddInvoice .status-headline {
+    color: var(--grayish-blue)
+}
+
+.AddInvoice .status-wrapper {
+    background-color: hsl(36, 100%, 97%);
+    padding: 1rem 2rem;
+    display: flex;
+    gap: 1rem;
+    border-radius: 5px;
+}
+
+.AddInvoice .status-wrapper>* {
+    color: #FF8F00;
+}
+
+.AddInvoice .invoice-actions>* {
+    background: none;
+    border: none;
+    padding: 1rem;
+    border-radius: 5px;
+    font-weight: 900;
+}
+
+.AddInvoice .invoice-actions {
+    display: none;
+}
+
+.AddInvoice .edit-btn {
+    color: var(--grayish-blue);
+}
+
+.AddInvoice .delete-btn {
+    color: white;
+    background-color: var(--salmon-pink);
+}
+
+
+.AddInvoice .change-status-btn {
+    background-color: var(--purple);
+    color: white;
+
+}

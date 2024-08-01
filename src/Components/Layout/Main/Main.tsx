@@ -4,7 +4,9 @@ import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import "./Main.css"
 import { useState } from 'react'
-import { Invoice } from '../Header/Invoice/Invoice'
+import { InvoiceCard } from '../InvoiceArea/InvoiceCard/InvoiceCard'
+import { EmptyInvoicesList } from '../InvoiceArea/NoInvoices/NoInvoices'
+import { AddInvoice } from '../InvoiceArea/AddInvoice/AddInvoice'
 
 export function Main(): JSX.Element {
 
@@ -65,9 +67,9 @@ export function Main(): JSX.Element {
             </div>
 
             <div className="invoices-container">
-                <Invoice />
-                <Invoice />
-                <Invoice />
+                {/* <InvoiceCard /> */}
+                {/* <EmptyInvoicesList /> */}
+                <AddInvoice />
             </div>
         </div>
     )

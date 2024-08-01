@@ -1,10 +1,10 @@
+
 .Header {
     height: 100%;
     display: flex;
     align-items: center;
     gap: 2.5rem;
     background-color: var(--dark-grayish-blue);
-
 }
 
 .Header .logo-area {
@@ -23,7 +23,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-
 }
 
 .Header .logo-container img {
