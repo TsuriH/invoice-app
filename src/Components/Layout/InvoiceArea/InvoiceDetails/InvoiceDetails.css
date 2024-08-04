@@ -1,7 +1,8 @@
 .InvoiceDetails {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 3rem;
+    background-color: var(--very-light-grey);
 }
 
 .InvoiceDetails .back-btn {
@@ -15,12 +16,15 @@
     margin-bottom: 2rem;
 }
 
-.InvoiceDetails .status-box, .InvoiceDetails .back-btn {
-        margin: 1rem 2rem;
+.InvoiceDetails .status-box,
+.InvoiceDetails .back-btn {
+    margin: 1rem 2rem;
 
 }
+
 .InvoiceDetails .status-box,
-.InvoiceDetails .mobile-invoice-actions {
+.InvoiceDetails .mobile-invoice-actions,
+.InvoiceDetails .invoice-information {
     background-color: white;
     border-radius: 5px;
     padding: 3rem 2rem;
@@ -101,8 +105,145 @@
 .InvoiceDetails .mobile-change-status-btn {
     background-color: var(--purple);
     color: white;
+}
+
+.InvoiceDetails .invoice-information {
+    margin: 0rem 2rem;
+}
+
+.InvoiceDetails .address>*,
+.InvoiceDetails .bill-to,
+.InvoiceDetails .invoice-id span,
+.invoice-date p:first-child,
+.payment-due p:first-child,
+.email p:first-child,
+.InvoiceDetails .calculation {
+    color: var(--light-purple)
+}
+
+.InvoiceDetails .invoice-information {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5rem;
 
 }
+
+
+.InvoiceDetails .invoice-details-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.InvoiceDetails .upper-part-headline {
+    margin-bottom: 4rem;
+}
+
+.InvoiceDetails .additional-details {
+    display: flex;
+
+}
+
+.InvoiceDetails .address .name {
+    color: black;
+}
+
+.InvoiceDetails .additional-details {
+    display: flex;
+    gap: 6rem;
+}
+
+.InvoiceDetails .basic-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.InvoiceDetails .name,
+.InvoiceDetails .invoice-date p:last-child,
+.InvoiceDetails .payment-due p:last-child,
+.InvoiceDetails .email p:last-child,
+.service-name,
+.service-cost {
+    font-weight: 700;
+    color: black;
+}
+
+.InvoiceDetails .invoice-date,
+.InvoiceDetails .bill-to,
+.InvoiceDetails .payment-due,
+.email {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.InvoiceDetails .lower-part {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.InvoiceDetails .payment {
+    display: flex;
+    flex-direction: column;
+    background: var(--very-light-grey);
+    border-radius: 5px;
+    align-self: center;
+}
+
+.InvoiceDetails .detailed-payment {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 0rem
+}
+
+.InvoiceDetails .detailed-payment>* {
+    display: flex;
+}
+
+.InvoiceDetails .service,
+.grand-total {
+    display: flex;
+    gap: 5rem;
+    padding: 1rem 2rem;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.InvoiceDetails .calculation {
+    display: flex;
+    gap: 0.5rem
+}
+
+
+
+.InvoiceDetails .grand-total {
+    background-color: var(--dark-grayish-blue);
+    padding: 2rem;
+    color: white;
+    font-weight: 500;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+
+}
+
+.InvoiceDetails .grand-total p:last-child {
+    font-size: var(--font-size-medium);
+}
+
+.InvoiceDetails .left-side {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+
+
+
+
+
 
 @media (min-width: 1024px) {
     .InvoiceDetails .invoice-actions>* {
