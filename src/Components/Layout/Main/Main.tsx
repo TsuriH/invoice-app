@@ -7,6 +7,7 @@ import { useState } from 'react'
 import { InvoiceCard } from '../InvoiceArea/InvoiceCard/InvoiceCard'
 import { EmptyInvoicesList } from '../InvoiceArea/NoInvoices/NoInvoices'
 import { AddInvoice } from '../InvoiceArea/AddInvoice/AddInvoice'
+import { InvoiceDetails } from '../InvoiceArea/InvoiceDetails/InvoiceDetails'
 
 export function Main(): JSX.Element {
 
@@ -69,7 +70,8 @@ export function Main(): JSX.Element {
             <div className="invoices-container">
                 {/* <InvoiceCard /> */}
                 {/* <EmptyInvoicesList /> */}
-                <AddInvoice />
+                {/* <AddInvoice /> */}
+                <InvoiceDetails />
             </div>
         </div>
     )
