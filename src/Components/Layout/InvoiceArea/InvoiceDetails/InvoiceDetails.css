@@ -16,13 +16,17 @@
     margin-bottom: 2rem;
 }
 
-.InvoiceDetails .status-box,
+.InvoiceDetails .mobile-status-box,
 .InvoiceDetails .back-btn {
     margin: 1rem 2rem;
 
 }
 
-.InvoiceDetails .status-box,
+.InvoiceDetails .status-box {
+    display: none;
+}
+
+.InvoiceDetails .mobile-status-box,
 .InvoiceDetails .mobile-invoice-actions,
 .InvoiceDetails .invoice-information {
     background-color: white;
@@ -118,7 +122,7 @@
 .payment-due p:first-child,
 .email p:first-child,
 .InvoiceDetails .calculation {
-    color: var(--light-purple)
+    color: var(--grayish-blue)
 }
 
 .InvoiceDetails .invoice-information {
@@ -185,18 +189,16 @@
     gap: 3rem;
 }
 
-.InvoiceDetails .payment {
+
+
+.InvoiceDetails .detailed-payment {
     display: flex;
     flex-direction: column;
     background: var(--very-light-grey);
     border-radius: 5px;
     align-self: center;
-}
-
-.InvoiceDetails .detailed-payment {
-    display: flex;
-    flex-direction: column;
-    padding: 1rem 0rem
+    padding: 1rem 0rem 0rem 0rem;
+    width: 100%;
 }
 
 .InvoiceDetails .detailed-payment>* {
@@ -216,8 +218,6 @@
     display: flex;
     gap: 0.5rem
 }
-
-
 
 .InvoiceDetails .grand-total {
     background-color: var(--dark-grayish-blue);
@@ -239,14 +239,120 @@
     gap: 0.5rem;
 }
 
+.InvoiceDetails .headline-table {
+    display: none;
+}
 
 
 
 
 
 
-@media (min-width: 1024px) {
-    .InvoiceDetails .invoice-actions>* {
+@media (min-width: 500px) {
+
+    .InvoiceDetails .invoice-details-container {
+        width: 100%;
+    }
+
+    .InvoiceDetails .upper-part {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .InvoiceDetails .upper-part-headline {
+        margin-bottom: 0rem;
+    }
+
+    .InvoiceDetails .lower-part {
+        flex-direction: row;
+        gap: 12rem;
+    }
+
+    .InvoiceDetails .additional-details {
+        display: flex;
+        gap: 12rem;
+    }
+
+    .InvoiceDetails .headline-table {
+        display: flex;
+        /* border: 2px solid red; */
+        justify-content: space-between;
+        padding: 2rem;
+        color: var(--grayish-blue)
+    }
+
+    .InvoiceDetails .right-table {
+        display: flex;
+        gap: 10rem;
+    }
+
+    .InvoiceDetails .left-side {
+        flex-direction: row;
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .InvoiceDetails .times {
+        display: none;
+    }
+
+    .InvoiceDetails .calculation {
+        gap: 10rem;
+        width: 34%;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+
+    .InvoiceDetails .amount,
+    .InvoiceDetails .service-cost {
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    .InvoiceDetails .mobile-invoice-actions,
+    .InvoiceDetails .mobile-status-box {
+        display: none;
+    }
+
+    .InvoiceDetails .invoice-actions {
+        display: block;
+    }
+
+    .InvoiceDetails .status-container {
+        justify-content: flex-start;
+    }
+
+    .InvoiceDetails .desktop-invoice-actions {
+        display: flex;
+        justify-content: space-between;
+        padding: 2rem;
+        background-color: white;
+        border-radius: 5px;
+
+    }
+
+    .InvoiceDetails .invoice-actions {
         display: flex;
     }
+
+    .InvoiceDetails .invoice-actions>* {
+        border-radius: 35px;
+        padding: 1.5rem 2rem;
+    }
+
+    .InvoiceDetails {
+        flex-direction: column-reverse;
+    }
+
+    .InvoiceDetails .invoice-information {
+        margin: 0rem 0rem;
+    } 
+
+    .InvoiceDetails .back-btn {
+       order: 1;
+    }
+
+
 }

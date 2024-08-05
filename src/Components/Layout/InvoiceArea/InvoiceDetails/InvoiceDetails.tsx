@@ -8,12 +8,12 @@ export function InvoiceDetails(): JSX.Element {
     return (
         <div className="InvoiceDetails">
 
-            <button className="back-btn">
+            {/* <button className="back-btn">
                 <FontAwesomeIcon icon={faChevronLeft} style={{ color: "var(--purple)" }} />
                 <p>Go back</p>
-            </button>
+            </button> */}
 
-            <div className="status-box">
+            <div className="mobile-status-box">
 
                 <div className="status-container">
                     <p className="status-headline">Status</p>
@@ -41,6 +41,7 @@ export function InvoiceDetails(): JSX.Element {
                             <p className="zip-code">E1 3EZ</p>
                             <p className="country">United Kingdom</p>
                         </div>
+
 
                     </div>
 
@@ -81,69 +82,89 @@ export function InvoiceDetails(): JSX.Element {
 
                     </div>
 
-
                 </div>
 
-                <div className="payment">
-                    <div className="detailed-payment">
-                        <div className="service">
-                            <div className="left-side">
 
-                                <p className="service-name">
-                                    Banner Design
-                                </p>
-                                
-                                <div className="calculation">
+                <div className="detailed-payment">
 
-                                    <p className="service-quantity">1</p>
-                                    <p className="times">x</p>
-                                    <p className="amount">€ 156.00</p>
+                    <div className="headline-table">
+                        <p>Item Name</p>
+                        <div className="right-table">
 
-                                </div>
-                            </div>
+                            <p>QTY.</p>
+                            <p>Price</p>
+                            <p>Total</p>
 
-                            <p className="service-cost">
-                            € 156.00
-                            </p>
-                        </div>
-
-                        <div className="service">
-                            <div className="left-side">
-                                <p className="service-name">
-                                    Email Design
-                                </p>
-                                <div className="calculation">
-
-                                    <p className="service-quantity">2</p>
-                                    <p className="times">x</p>
-                                    <p className="amount"> € 200</p>
-
-                                </div>
-                            </div>
-
-                            <p className="service-cost">
-                                € 400.00
-                            </p>
-                        </div>
-
-                        <div className="grand-total">
-                            <p>Grand Total</p>
-                            <p className="amount"> € 556.00</p>
                         </div>
                     </div>
 
+                    <div className="service">
+                        <div className="left-side">
 
+                            <p className="service-name">
+                                Banner Design
+                            </p>
 
+                            <div className="calculation">
+
+                                <p className="service-quantity">1</p>
+                                <p className="times">x</p>
+                                <p className="amount"><span>€ </span> 156.00</p>
+
+                            </div>
+                        </div>
+
+                        <p className="service-cost">
+                            <span>€</span> 156.00
+                        </p>
+                    </div>
+
+                    <div className="service">
+                        <div className="left-side">
+                            <p className="service-name">
+                                Email Design
+                            </p>
+                            <div className="calculation">
+
+                                <p className="service-quantity">2</p>
+                                <p className="times">x</p>
+                                <p className="amount"> <span>€</span> 200.00</p>
+
+                            </div>
+                        </div>
+
+                        <p className="service-cost">
+                            <span>€</span> 400.00
+                        </p>
+                    </div>
+
+                    <div className="grand-total">
+                        <p>Grand Total</p>
+                        <p className="amount"> € 556.00</p>
+                    </div>
+                </div>
+            </div>
+
+            {/* invoice actions for tablet an above */}
+            <div className="desktop-invoice-actions">
+                <div className="status-box">
+                    <div className="status-container">
+                        <p className="status-headline">Status</p>
+                        <div className="status-wrapper">
+                            <FontAwesomeIcon icon={faCircle} style={{ fontSize: "1rem" }} />
+                            <p className="status">Pending</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="invoice-actions">
+                    <button className="edit-btn">Edit</button>
+                    <button className="delete-btn">Delete</button>
+                    <button className="change-status-btn">Mark as Paid</button>
                 </div>
 
             </div>
 
-            {/* invoice actions for tablet an above */}
-            <div className="invoice-actions">
-                <button className="edit-btn">Edit</button>
-                <button className="delete-btn">Delete</button>
-                <button className="change-status-btn">Mark as Paid</button>
-            </div>
             {/* invoice actions for tablet an above */}
 
 
@@ -153,6 +174,7 @@ export function InvoiceDetails(): JSX.Element {
             </div>
 
             {/* invoice actions for mobile */}
+
             <div className="mobile-invoice-actions">
                 <button className="mobile-edit-btn">Edit</button>
                 <button className="mobile-delete-btn">Delete</button>
