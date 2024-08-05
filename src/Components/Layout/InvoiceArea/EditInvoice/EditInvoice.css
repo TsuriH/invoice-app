@@ -11,7 +11,11 @@
     font-weight: 600;
 }
 
-.EditInvoice .bill-from-container, .detailed-address {
+.EditInvoice .bill-from-container,
+.detailed-address,
+.bill-to-container,
+.invoice-date-container,
+.last-details {
     display: flex;
     flex-direction: column;
     gap: 2rem;
@@ -32,8 +36,9 @@
     gap: 0.5rem;
 }
 
-.EditInvoice label input {
-    border:none;
+.EditInvoice label input,
+select {
+    border: none;
     border: 0.1px solid var(--grayish-lavender);
     opacity: 0.2;
     border-radius: 5px;
@@ -42,9 +47,33 @@
 }
 
 .EditInvoice .city-and-post-container {
-    display: flex; 
+    display: flex;
     gap: 2rem;
     width: 100%;
 }
 
+.EditInvoice .city-country-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
 
+.EditInvoice .items-container input {
+    width: 100%;
+}
+
+.EditInvoice .items-container {
+    display: grid;
+    gap: 1rem;
+    align-items: center;
+    grid-template-columns: 3fr 0.5fr 1fr 1fr 0.5fr;
+    grid-template-rows: repeat(5, 40px);
+}
+
+.EditInvoice .items-container input {
+    height: 100%;
+}
+
+.EditInvoice .space-filler {
+    visibility: hidden;
+}
