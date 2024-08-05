@@ -8,6 +8,7 @@ import { InvoiceCard } from '../InvoiceArea/InvoiceCard/InvoiceCard'
 import { EmptyInvoicesList } from '../InvoiceArea/NoInvoices/NoInvoices'
 import { AddInvoice } from '../InvoiceArea/AddInvoice/AddInvoice'
 import { InvoiceDetails } from '../InvoiceArea/InvoiceDetails/InvoiceDetails'
+import { EditInvoice } from '../InvoiceArea/EditInvoice/EditInvoice'
 
 export function Main(): JSX.Element {
 
@@ -71,7 +72,8 @@ export function Main(): JSX.Element {
                 {/* <InvoiceCard /> */}
                 {/* <EmptyInvoicesList /> */}
                 {/* <AddInvoice /> */}
-                <InvoiceDetails />
+                {/* <InvoiceDetails /> */}
+                <EditInvoice />
             </div>
         </div>
     )
