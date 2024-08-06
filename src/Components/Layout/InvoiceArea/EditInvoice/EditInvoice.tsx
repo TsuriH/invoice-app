@@ -109,29 +109,56 @@ export function EditInvoice(): JSX.Element {
 
             <div className="items-container">
 
-                <div className="header-row">
-                    <p className="mobile-single-row">Item Name</p>
+                {/* <div className="header-row">
+                    <p className="mobile-single-row" >Item Name</p>
                     <p>Qty.</p>
                     <p>Price</p>
                     <p>Total</p>
                     <FontAwesomeIcon icon={faTrash} className="space-filler" />
-                </div>
+                </div> */}
 
                 <div className="item-row">
-                    <input type="text" className="mobile-single-row" />
-                    <input type="number" />
-                    <input type="number" className="test-me" />
-                    <p style={{ color: "var(--grayish-lavender)", fontWeight: "700", fontSize: "1.5rem" }}>156.00</p>
-                    <FontAwesomeIcon icon={faTrash} style={{ color: "grey", fontSize: "1.8rem" }} />
+
+                    <div className="item-name-input-container item-container">
+                        <p className="mobile-header-input">Item Name</p>
+                        <input type="text" className="mobile-single-row" />
+                    </div>
+
+                    <div className="quantity-input-container item-container" >
+                        <p className="mobile-header-input">Qty.</p>
+                        <input type="number" className="mobile-single-row" />
+                    </div>
+
+                    <div className="Price-input-container item-container">
+                        <p className="mobile-header-input">Price</p>
+                        <input type="number" className="mobile-single-row" />
+                    </div>
+
+                    <div className="Price-input-container item-container">
+                        <p className="mobile-header-input">Total</p>
+                        <p className="item-total" style={{ color: "var(--grayish-lavender)", fontWeight: "700", fontSize: "1.5rem" }}>156.00</p>
+                    </div>
+
+                    <div className="item-bin-container item-container">
+                        <p className="space-filler ">fill</p>
+                        <FontAwesomeIcon icon={faTrash} style={{ color: "var(--grayish-lavender)", fontSize: "1.8rem" }} />
+                    </div>
+
                 </div>
 
+                <button className="add-new-item-btn">+ Add New Item</button>
             </div>
 
             <div className="edit-buttons-container">
-
+                <button className="cancel-btn">Cancel</button>
+                <button className="save-btn">Save Changes</button>
             </div>
 
 
         </div>
-    )
+    ) background: none;
+    border: none;
+    padding: 1rem;
+    border-radius: 5px;
+    font-weight: 900;
 }
