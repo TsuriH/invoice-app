@@ -104,22 +104,26 @@ export function EditInvoice(): JSX.Element {
 
 
             </div>
+            <h3 className="item-header">Item List</h3>
+
 
             <div className="items-container">
 
-                <p>Item Name</p>
-                <p>Qty.</p>
-                <p>Price</p>
-                <p>Total</p>
-                <FontAwesomeIcon icon={faTrash} className="space-filler" />
+                <div className="header-row">
+                    <p className="mobile-single-row">Item Name</p>
+                    <p>Qty.</p>
+                    <p>Price</p>
+                    <p>Total</p>
+                    <FontAwesomeIcon icon={faTrash} className="space-filler" />
+                </div>
 
-               
-
-                <input type="text" placeholder="test" />
-                <input type="text" placeholder="test"/>
-                <input type="text" placeholder="test" />
-                <input type="text" placeholder="test"/>
-                <FontAwesomeIcon icon={faTrash} />
+                <div className="item-row">
+                    <input type="text" className="mobile-single-row" />
+                    <input type="number" />
+                    <input type="number" className="test-me" />
+                    <p style={{ color: "var(--grayish-lavender)", fontWeight: "700", fontSize: "1.5rem" }}>156.00</p>
+                    <FontAwesomeIcon icon={faTrash} style={{ color: "grey", fontSize: "1.8rem" }} />
+                </div>
 
             </div>
 

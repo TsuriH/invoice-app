@@ -66,8 +66,33 @@ select {
     display: grid;
     gap: 1rem;
     align-items: center;
-    grid-template-columns: 3fr 0.5fr 1fr 1fr 0.5fr;
-    grid-template-rows: repeat(5, 40px);
+}
+
+.EditInvoice .header-row,
+.item-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+    gap: 1rem;
+    align-items: center;
+}
+
+.EditInvoice .item-header {
+    color: var(--grayish-lavender)
+}
+
+.EditInvoice .header-row>p {
+    color: var(--grayish-lavender);
+}
+
+.EditInvoice .item-row>input {
+    padding: 15px;
+    border: 1px solid #e0e0e0;
+    text-transform: capitalize;
+    font-weight: 600;
+}
+
+.EditInvoice input[type="number"] {
+    -moz-appearance: textfield;
 }
 
 .EditInvoice .items-container input {
@@ -77,3 +102,5 @@ select {
 .EditInvoice .space-filler {
     visibility: hidden;
 }
+
+
