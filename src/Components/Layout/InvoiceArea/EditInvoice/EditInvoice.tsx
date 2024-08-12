@@ -109,39 +109,52 @@ export function EditInvoice(): JSX.Element {
 
             <div className="items-container">
 
-                {/* <div className="header-row">
-                    <p className="mobile-single-row" >Item Name</p>
-                    <p>Qty.</p>
-                    <p>Price</p>
-                    <p>Total</p>
-                    <FontAwesomeIcon icon={faTrash} className="space-filler" />
-                </div> */}
-
                 <div className="item-row">
 
-                    <div className="item-name-input-container item-container">
-                        <p className="mobile-header-input">Item Name</p>
-                        <input type="text" className="mobile-single-row" />
+                    <div className="header-row">
+                        <p className="mobile-single-row" >Item Name</p>
+                        <div className="more-headers">
+                            <p>Qty.</p>
+                            <p>Price</p>
+                            <p>Total</p>
+                            <FontAwesomeIcon icon={faTrash} className="space-filler" />
+                        </div>
+
                     </div>
 
-                    <div className="quantity-input-container item-container" >
-                        <p className="mobile-header-input">Qty.</p>
-                        <input type="number" className="mobile-single-row" />
-                    </div>
+                    <div className="inputs-container">
 
-                    <div className="Price-input-container item-container">
-                        <p className="mobile-header-input">Price</p>
-                        <input type="number" className="mobile-single-row" />
-                    </div>
+                        <div className="item-name-input-container item-container">
 
-                    <div className="Price-input-container item-container">
-                        <p className="mobile-header-input">Total</p>
-                        <p className="item-total" style={{ color: "var(--grayish-lavender)", fontWeight: "700", fontSize: "1.5rem" }}>156.00</p>
-                    </div>
+                            <p className="mobile-header-input">Item Name</p>
+                            <input type="text" className="mobile-single-row" />
 
-                    <div className="item-bin-container item-container">
-                        <p className="space-filler ">fill</p>
-                        <FontAwesomeIcon icon={faTrash} style={{ color: "var(--grayish-lavender)", fontSize: "1.8rem" }} />
+                        </div>
+
+                        <div className="lower-item-info">
+
+                            <div className="quantity-input-container item-container" >
+                                <p className="mobile-header-input">Qty.</p>
+                                <input type="number" className="mobile-single-row" />
+                            </div>
+
+                            <div className="Price-input-container item-container">
+                                <p className="mobile-header-input">Price</p>
+                                <input type="number" className="mobile-single-row" />
+                            </div>
+
+                            <div className="Price-input-container item-container">
+                                <p className="mobile-header-input">Total</p>
+                                <p className="item-total" style={{ color: "var(--grayish-lavender)", fontWeight: "700", fontSize: "1.5rem" }}>156.00</p>
+                            </div>
+
+                            <div className="item-bin-container item-container">
+                                <p className="space-filler ">fill</p>
+                                <FontAwesomeIcon icon={faTrash} style={{ color: "var(--grayish-lavender)", fontSize: "1.8rem" }} />
+                            </div>
+
+                        </div>
+
                     </div>
 
                 </div>
@@ -153,12 +166,6 @@ export function EditInvoice(): JSX.Element {
                 <button className="cancel-btn">Cancel</button>
                 <button className="save-btn">Save Changes</button>
             </div>
-
-
         </div>
-    ) background: none;
-    border: none;
-    padding: 1rem;
-    border-radius: 5px;
-    font-weight: 900;
+    )
 }

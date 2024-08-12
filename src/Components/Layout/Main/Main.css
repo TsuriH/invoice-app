@@ -1,5 +1,4 @@
 .Main {
-   
     display: flex;
     flex-direction: column;
     gap: 2rem;
@@ -112,7 +111,7 @@
 @media (min-width: 577px) {
 
     .Main {
-        padding: 4rem;
+        /* padding: 4rem; */
     }
 
     .Main .main-header {
