@@ -8,11 +8,6 @@ export function InvoiceDetails(): JSX.Element {
     return (
         <div className="InvoiceDetails">
 
-            {/* <button className="back-btn">
-                <FontAwesomeIcon icon={faChevronLeft} style={{ color: "var(--purple)" }} />
-                <p>Go back</p>
-            </button> */}
-
             <div className="delete-alert">
 
                 <div className="delete-alert-container">

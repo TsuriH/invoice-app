@@ -246,13 +246,14 @@
     top: 0px;
     height: 142%;    /* problem why cant I let background to cover all the screen it doesn twork whend I do 100vh or 100% */
     z-index: 10;
- 
     display: flex;
     flex-direction: column;
     justify-content: center;
+    display:  none;
 }
 
 .InvoiceDetails .delete-alert-container {
+    
     background: white;
     padding: 2rem;
     display: flex;
