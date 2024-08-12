@@ -157,6 +157,8 @@ export function EditInvoice(): JSX.Element {
 
                     </div>
 
+                    
+
                 </div>
 
                 <button className="add-new-item-btn">+ Add New Item</button>

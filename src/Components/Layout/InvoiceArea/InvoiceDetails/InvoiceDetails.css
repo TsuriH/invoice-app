@@ -133,7 +133,6 @@
 
 }
 
-
 .InvoiceDetails .invoice-details-container {
     display: flex;
     flex-direction: column;
@@ -189,8 +188,6 @@
     gap: 3rem;
 }
 
-
-
 .InvoiceDetails .detailed-payment {
     display: flex;
     flex-direction: column;
@@ -243,6 +240,60 @@
     display: none;
 }
 
+.InvoiceDetails .delete-alert {
+    background-color: rgba(47, 47, 51, 0.9);
+    position: absolute;
+    top: 0px;
+    height: 142%;    /* problem why cant I let background to cover all the screen it doesn twork whend I do 100vh or 100% */
+    z-index: 10;
+ 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.InvoiceDetails .delete-alert-container {
+    background: white;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 0 2rem;
+    border-radius: 8px;
+}
+
+.InvoiceDetails .delete-alert-text {
+    color: var(--grayish-lavender)
+}
+
+.InvoiceDetails .delete-btn-container {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+}
+
+.InvoiceDetails .delete-btn-container>* {
+    border: none;
+    background: red;
+    padding: 1rem 2rem;
+    border-radius: 35px;
+    font-weight: 600;
+}
+
+.InvoiceDetails .delete-btn-container button:first-child {
+    color: var(--grayish-blue);
+    background: var(--very-light-grey);
+}
+
+.InvoiceDetails .delete-btn-container button:last-child {
+    color: white;
+    background: var(--salmon-pink);
+}
+
+.InvoiceDetails .delete-btn-container p {
+    color: white;
+    background: var(--salmon-pink);
+}
 
 
 
@@ -316,6 +367,7 @@
         display: none;
     }
 
+
     .InvoiceDetails .invoice-actions {
         display: block;
     }
@@ -348,10 +400,10 @@
 
     .InvoiceDetails .invoice-information {
         margin: 0rem 0rem;
-    } 
+    }
 
     .InvoiceDetails .back-btn {
-       order: 1;
+        order: 1;
     }
 
 

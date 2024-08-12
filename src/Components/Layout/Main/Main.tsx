@@ -4,11 +4,9 @@ import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import "./Main.css"
 import { useState } from 'react'
-import { InvoiceCard } from '../InvoiceArea/InvoiceCard/InvoiceCard'
-import { EmptyInvoicesList } from '../InvoiceArea/NoInvoices/NoInvoices'
-import { AddInvoice } from '../InvoiceArea/AddInvoice/AddInvoice'
-import { InvoiceDetails } from '../InvoiceArea/InvoiceDetails/InvoiceDetails'
+
 import { EditInvoice } from '../InvoiceArea/EditInvoice/EditInvoice'
+import { InvoiceDetails } from '../InvoiceArea/InvoiceDetails/InvoiceDetails'
 
 export function Main(): JSX.Element {
 
@@ -20,6 +18,7 @@ export function Main(): JSX.Element {
 
     return (
         <div className="Main">
+
             <div className="main-header">
 
                 <div className="invoices-quantity">
@@ -72,9 +71,12 @@ export function Main(): JSX.Element {
                 {/* <InvoiceCard /> */}
                 {/* <EmptyInvoicesList /> */}
                 {/* <AddInvoice /> */}
-                {/* <InvoiceDetails /> */}
-                <EditInvoice />
+                <InvoiceDetails />
+                {/* <EditInvoice /> */}
+                {/* <AddInvoice /> */}
             </div>
         </div>
     )
 }
+
+

@@ -13,6 +13,20 @@ export function InvoiceDetails(): JSX.Element {
                 <p>Go back</p>
             </button> */}
 
+            <div className="delete-alert">
+
+                <div className="delete-alert-container">
+                    <h2>Confirm Deletion</h2>
+                    <p className="delete-alert-text">Are you sure you want to delete invoice #XM324 This action cannot be undone</p>
+                    <div className="delete-btn-container">
+                        <button>Cancel</button>
+                        <button>Delete</button>
+                    </div>
+                </div>
+
+            </div>
+
+
             <div className="mobile-status-box">
 
                 <div className="status-container">
@@ -181,6 +195,9 @@ export function InvoiceDetails(): JSX.Element {
                 <button className="mobile-change-status-btn">Mark as Paid</button>
             </div>
             {/* invoice actions for mobile */}
+
+
+
         </div>
     )
 }

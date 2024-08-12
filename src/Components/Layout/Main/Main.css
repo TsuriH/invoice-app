@@ -103,6 +103,7 @@
     display: flex;
     flex-direction: column;
     gap: 2rem;
+
 }
 
 
@@ -117,7 +118,7 @@
     .Main .main-header {
         gap: 3rem;
     }
-    
+
     .Main .text-btn span {
         display: inline-block;
     }
@@ -138,7 +139,8 @@
         font-size: var(--font-size-small);
     }
 
-    .Main .action-description, .Main .icon-plus {
+    .Main .action-description,
+    .Main .icon-plus {
         font-size: var(--font-size-small);
     }
 
@@ -176,13 +178,11 @@
         border-radius: 1rem;
         box-shadow: 0px 4px 8px 1px rgba(0, 0, 0, 0.1);
     }
-    
-
-    
 
 }
 
-@media (min-width: 1024px) {
 
 
-}
+
+
+@media (min-width: 1024px) {}

@@ -79,6 +79,8 @@ select {
 .EditInvoice .lower-item-info {
     display: flex;
     gap: 1rem;
+    margin-top: 2rem;
+
     align-items: center;
 }
 
@@ -91,7 +93,8 @@ select {
 }
 
 .EditInvoice .item-header {
-    color: var(--grayish-lavender)
+    color: var(--grayish-lavender);
+    margin-top: 5rem;
 }
 
 .EditInvoice .header-row>p,
@@ -111,6 +114,13 @@ select {
     border: none;
     border: 2px solid red;
 }
+
+.EditInvoice .item-total {
+    border: none;
+}
+
+.EditInvoice .inputs-container {
+margin-bottom: 1rem;}
 
 .EditInvoice input[type="number"] {
     -moz-appearance: textfield;
@@ -141,11 +151,14 @@ select {
     border-radius: 25px;
     font-weight: 600;
     color: var(--grayish-blue);
+    width: 100%;
+    margin-top: 5rem;
 }
 
 .EditInvoice .edit-buttons-container {
     display: flex;
     gap: 1rem;
+    margin-top: 6rem;
 }
 
 
