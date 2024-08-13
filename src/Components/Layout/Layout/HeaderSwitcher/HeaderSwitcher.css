@@ -1,0 +1,194 @@
+.HeaderSwitcher {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.HeaderSwitcher .main-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 2rem;
+}
+
+.HeaderSwitcher .invoices-quantity {
+    flex: 1;
+}
+
+.HeaderSwitcher .invoices-total {
+    color: var(--grayish-lavender);
+    font-size: 1rem;
+}
+
+.HeaderSwitcher .invoices-total-long-version {
+    display: none;
+}
+
+.HeaderSwitcher .filter {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border: none;
+    background: none;
+    font-weight: 900;
+    font-size: 1rem;
+}
+
+.HeaderSwitcher .text-btn span {
+    display: none;
+}
+
+.HeaderSwitcher .filter-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+
+}
+
+.HeaderSwitcher .filters-options {
+    position: absolute;
+    top: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 1rem;
+    gap: 1rem;
+    font-weight: 600;
+    background-color: white;
+    width: 150px;
+    height: 100px;
+    border-radius: 1rem;
+    box-shadow: 0px 4px 8px 1px rgba(0, 0, 0, 0.1);
+}
+
+.HeaderSwitcher .filters-options>* {
+    display: flex;
+    gap: 1rem;
+}
+
+.HeaderSwitcher .chevron-arrow {
+    color: var(--purple);
+    font-size: 1rem;
+}
+
+.HeaderSwitcher .new-invoice-btn {
+    border: none;
+    background: none;
+    background-color: var(--purple);
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.5em;
+    border-radius: 2rem;
+}
+
+.HeaderSwitcher .icon-plus {
+    background: white;
+    color: var(--purple);
+    border-radius: 50%;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+}
+
+.HeaderSwitcher .action-description {
+    font-weight: bold;
+    font-size: 1rem;
+    margin-right: 0.5rem
+}
+
+.HeaderSwitcher .action-description span {
+    display: none;
+}
+
+.HeaderSwitcher .back-btn {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    border: none;
+    background: none;
+    padding:2rem;
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+
+
+/* Responsive */
+@media (min-width: 577px) {
+
+    .HeaderSwitcher .main-header {
+        gap: 3rem;
+    }
+
+    .HeaderSwitcher .text-btn span {
+        display: inline-block;
+    }
+
+    .HeaderSwitcher .action-description span {
+        display: inline-block;
+    }
+
+    .HeaderSwitcher .invoices-container {
+        margin-top: 3rem;
+    }
+
+    .HeaderSwitcher .invoices {
+        font-size: var(--font-size-large);
+    }
+
+    .HeaderSwitcher .invoices-total {
+        font-size: var(--font-size-small);
+    }
+
+    .HeaderSwitcher .action-description,
+    .HeaderSwitcher .icon-plus {
+        font-size: var(--font-size-small);
+    }
+
+    .HeaderSwitcher .new-invoice-btn {
+        border-radius: 3rem;
+        padding: 1em;
+    }
+
+    .HeaderSwitcher .filter {
+        font-size: var(--font-size-small);
+    }
+
+    .HeaderSwitcher .invoices-total-long-version {
+        display: inline-block;
+    }
+
+    .HeaderSwitcher .invoices-total-short-version {
+        display: none;
+    }
+
+    .HeaderSwitcher .filter-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+
+    }
+
+    .HeaderSwitcher .filters-options {
+        position: absolute;
+        top: 30px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 1rem;
+        gap: 1rem;
+        background-color: white;
+        width: 150px;
+        height: 100px;
+        border-radius: 1rem;
+        accent-color: var(--purple);
+        box-shadow: 0px 4px 8px 1px rgba(0, 0, 0, 0.1);
+    }
+
+}

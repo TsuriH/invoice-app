@@ -1,5 +1,5 @@
 import "./NoInvoices.css"
-import illustrationEmpty from "../../../../assets/illustration-empty.svg"
+import illustrationEmpty from "../../../assets/illustration-empty.svg"
 
 
 export function EmptyInvoicesList(): JSX.Element {

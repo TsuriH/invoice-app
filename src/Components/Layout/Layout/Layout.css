@@ -24,4 +24,10 @@
         visibility: hidden;
     }
 
+    .Layout main {
+        padding: 2% 15%;
+
+    }
+
+
 }

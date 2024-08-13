@@ -1,18 +1,21 @@
 import { Header } from "../Header/Header"
-import { Main } from "../Main/Main"
+import { HeaderSwitcher } from "./HeaderSwitcher/HeaderSwitcher"
 import "./Layout.css"
+import { Routing } from "./Routing/Routing"
+
+
 
 export function Layout(): JSX.Element {
 
-
     return (
-        <div className="Layout">      
+        <div className="Layout">
             <header>
                 <Header />
             </header>
 
             <main>
-                <Main />
+                <HeaderSwitcher />
+                <Routing />
             </main>
 
             <div className="spacer">
