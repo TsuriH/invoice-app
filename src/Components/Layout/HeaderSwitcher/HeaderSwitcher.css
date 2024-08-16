@@ -4,6 +4,10 @@
     gap: 2rem;
 }
 
+.HeaderSwitcher .go-back-btn {
+    text-decoration: none;
+}
+
 .HeaderSwitcher .main-header {
     display: flex;
     align-items: center;

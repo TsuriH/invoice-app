@@ -1,7 +1,7 @@
 import { Header } from "../Header/Header"
-import { HeaderSwitcher } from "./HeaderSwitcher/HeaderSwitcher"
+import { HeaderSwitcher } from "../HeaderSwitcher/HeaderSwitcher"
 import "./Layout.css"
-import { Routing } from "./Routing/Routing"
+import { Routing } from "../Routing/Routing"
 
 
 

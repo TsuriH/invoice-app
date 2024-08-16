@@ -7,17 +7,25 @@
     gap: 0.5rem;
     padding: 2rem;
     border-radius: 1rem;
+    border: 2px solid transparent;
+    text-decoration: none;
+
+}
+
+.InvoiceCard:hover {
+    cursor: pointer;
+    border: 2px solid var(--purple)
 }
 
 .InvoiceCard .invoice-card-id span,
 .InvoiceCard .date-created,
 .InvoiceCard .customer-name {
-    color: var(--grayish-lavender)
+    color: var(--grayish-lavender);
 }
 
 .InvoiceCard .invoice-card-id {
     font-weight: bold;
-
+    text-decoration: none;
 }
 
 .InvoiceCard .date-created {
@@ -27,8 +35,7 @@
 }
 
 .InvoiceCard .invoice-card-price {
-    grid-column: 1/1;
-    grid-row: 3/4;
+   
     align-self: flex-start;
     margin-top: 0.5rem;
 }
@@ -45,6 +52,9 @@
 
 .InvoiceCard .invoice-card-price {
     font-weight: bold;
+    flex-basis: 90px;
+    text-align: start;
+    
 }
 
 .InvoiceCard .right-chevron {
@@ -66,14 +76,25 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 65%;
     border-radius: 5px;
+    width: 110px;
+    height: 45px;
     gap: 1rem;
-    padding: 1.3rem 2rem;
-    background-color: #F3FDFA;
+    background-color: #bae4d7;
     color: #33D69F;
     font-weight: bold;
 }
+
+.InvoiceCard .status {
+    text-transform: capitalize;
+    flex-basis: 150px;
+}
+
+.InvoiceCard .invoice-card-id, .invoice-card-price{
+    color: var(--black)
+}
+
+
 
 @media (min-width: 577px) {
 
@@ -90,11 +111,13 @@
 
     .InvoiceCard .status {
         width: fit-content;
+        
     }
 
     .InvoiceCard .invoice-card-price {
         align-self: center;
         margin-top: 0rem;
+        
     }
 
     .InvoiceCard .date-created {

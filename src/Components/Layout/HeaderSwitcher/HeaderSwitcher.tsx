@@ -1,5 +1,5 @@
 import "./HeaderSwitcher.css"
-import { useLocation } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { useState } from 'react'
 import { faChevronUp } from '@fortawesome/free-solid-svg-icons'
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
@@ -68,8 +68,6 @@ export function HeaderSwitcher(): JSX.Element {
 
                         </div>
 
-
-
                         <button className="new-invoice-btn">
                             <div className="icon-plus">
                                 <FontAwesomeIcon icon={faPlus} />
@@ -84,7 +82,7 @@ export function HeaderSwitcher(): JSX.Element {
                             : { background: "white" }
                     }>
                         <FontAwesomeIcon icon={faChevronLeft} style={{ color: "var(--purple)" }} />
-                        <p>Go back</p>
+                        <NavLink to="/" className="go-back-btn">Go back</NavLink>
                     </button>)
 
             }

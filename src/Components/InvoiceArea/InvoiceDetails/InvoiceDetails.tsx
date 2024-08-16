@@ -2,14 +2,49 @@ import "./InvoiceDetails.css"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCircle } from "@fortawesome/free-solid-svg-icons"
 import { faChevronLeft } from "@fortawesome/free-solid-svg-icons"
+import { useParams } from "react-router-dom"
+import invoicesList from "../../../data.json"
 
 export function InvoiceDetails(): JSX.Element {
+
+    const { invoiceId } = useParams()
+
+    const currentInvoice = invoicesList.filter(invoice => invoice.id === invoiceId)
+
+    function formatDate(dateString: string) {
+        const date = new Date(dateString);
+        return date.toLocaleDateString('en-GB', {
+            day: '2-digit',
+            month: 'short',
+            year: 'numeric',
+        });
+    }
+
+    
+    const formatNumber = (num: number) => {
+        // Convert number to a string with two decimal places
+        const formattedNumber = Number(num).toFixed(2);
+
+        // Split the number into integer and decimal parts
+        const [integerPart, decimalPart] = formattedNumber.split('.');
+
+        // Add commas to the integer part
+        const integerWithCommas = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
+        // Return the formatted number
+        return `${integerWithCommas}.${decimalPart}`;
+    };
+
+
+    const invoiceDesignedDate = formatDate(currentInvoice[0].createdAt)
+    const invoicedesignedPaymentDue = formatDate(currentInvoice[0].paymentDue)
+
+
 
     return (
         <div className="InvoiceDetails">
 
             <div className="delete-alert">
-
                 <div className="delete-alert-container">
                     <h2>Confirm Deletion</h2>
                     <p className="delete-alert-text">Are you sure you want to delete invoice #XM324 This action cannot be undone</p>
@@ -26,9 +61,10 @@ export function InvoiceDetails(): JSX.Element {
 
                 <div className="status-container">
                     <p className="status-headline">Status</p>
+
                     <div className="status-wrapper">
                         <FontAwesomeIcon icon={faCircle} style={{ fontSize: "1rem" }} />
-                        <p className="status">Pending</p>
+                        <p className="status" style={{textTransform:"capitalize"}}>{currentInvoice[0].status}</p>
                     </div>
                 </div>
             </div>
@@ -40,15 +76,17 @@ export function InvoiceDetails(): JSX.Element {
                     <div className="upper-part">
 
                         <div className="upper-part-headline">
-                            <h2 className="invoice-id"><span>#</span>XM9141</h2>
-                            <p className="service-name">Graphic Design</p>
+
+                            <h2 className="invoice-id"><span>#</span>{currentInvoice[0].id}</h2>
+
+                            <p className="service-name">{currentInvoice[0].description}</p>
                         </div>
 
                         <div className="address">
-                            <p className="street"> 19 Union Terrace</p>
-                            <p className="city">London</p>
-                            <p className="zip-code">E1 3EZ</p>
-                            <p className="country">United Kingdom</p>
+                            <p className="street"> {currentInvoice[0].senderAddress.street}</p>
+                            <p className="city">{currentInvoice[0].senderAddress.city}</p>
+                            <p className="zip-code">{currentInvoice[0].senderAddress.postCode}</p>
+                            <p className="country">{currentInvoice[0].senderAddress.country}</p>
                         </div>
 
 
@@ -61,12 +99,12 @@ export function InvoiceDetails(): JSX.Element {
 
                                 <div className="invoice-date">
                                     <p>Invoice Date</p>
-                                    <p>21 Aug 2021</p>
+                                    <p>{invoiceDesignedDate}</p>
                                 </div>
 
                                 <div className="payment-due">
                                     <p>Payment Due</p>
-                                    <p>20 Sep 2021</p>
+                                    <p>{invoicedesignedPaymentDue}</p>
                                 </div>
 
                             </div>
@@ -74,11 +112,11 @@ export function InvoiceDetails(): JSX.Element {
                             <div className="bill-to">
                                 <p>Bill to</p>
                                 <div className="address">
-                                    <p className="name">Alex Grim</p>
-                                    <p className="street">84 Church Way</p>
-                                    <p className="city">Bradford</p>
-                                    <p className="zip-code">BD1 9PB</p>
-                                    <p className="country">United Kingdom</p>
+                                    <p className="name">{currentInvoice[0].clientName}</p>
+                                    <p className="street">{currentInvoice[0].clientAddress.street}</p>
+                                    <p className="city">{currentInvoice[0].clientAddress.city}</p>
+                                    <p className="zip-code">{currentInvoice[0].clientAddress.postCode}</p>
+                                    <p className="country">{currentInvoice[0].clientAddress.country}</p>
                                 </div>
                             </div>
 
@@ -86,7 +124,7 @@ export function InvoiceDetails(): JSX.Element {
 
                         <div className="email">
                             <p>Sent to</p>
-                            <p>alexgrim@mail.com</p>
+                            <p>{currentInvoice[0].clientEmail}</p>
                         </div>
 
                     </div>
@@ -107,49 +145,33 @@ export function InvoiceDetails(): JSX.Element {
                         </div>
                     </div>
 
-                    <div className="service">
-                        <div className="left-side">
+                    {currentInvoice[0].items.map(p =>
 
-                            <p className="service-name">
-                                Banner Design
-                            </p>
+                        <div className="service">
 
-                            <div className="calculation">
+                            <div className="left-side">
+                                <p className="service-name">
+                                    {p.name}
+                                </p>
+                                <div className="calculation">
 
-                                <p className="service-quantity">1</p>
-                                <p className="times">x</p>
-                                <p className="amount"><span>€ </span> 156.00</p>
+                                    <p className="service-quantity">{p.quantity}</p>
+                                    <p className="times">x</p>
+                                    <p className="amount"> <span>£</span> {formatNumber(p.price)}</p>
 
+                                </div>
                             </div>
-                        </div>
 
-                        <p className="service-cost">
-                            <span>€</span> 156.00
-                        </p>
-                    </div>
-
-                    <div className="service">
-                        <div className="left-side">
-                            <p className="service-name">
-                                Email Design
+                            <p className="service-cost">
+                                <span>£</span> {formatNumber(p.price * p.quantity) }
                             </p>
-                            <div className="calculation">
-
-                                <p className="service-quantity">2</p>
-                                <p className="times">x</p>
-                                <p className="amount"> <span>€</span> 200.00</p>
-
-                            </div>
                         </div>
+                    )}
 
-                        <p className="service-cost">
-                            <span>€</span> 400.00
-                        </p>
-                    </div>
 
                     <div className="grand-total">
                         <p>Grand Total</p>
-                        <p className="amount"> € 556.00</p>
+                        <p className="amount">£{currentInvoice[0].items.reduce((s, p) =>s + p.total,0).toFixed(2)}</p>
                     </div>
                 </div>
             </div>
