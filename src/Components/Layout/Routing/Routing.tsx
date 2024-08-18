@@ -5,15 +5,18 @@ import { InvoiceDetails } from "../../InvoiceArea/InvoiceDetails/InvoiceDetails"
 import { AddInvoice } from "../../InvoiceArea/AddInvoice/AddInvoice";
 import { EditInvoice } from "../../InvoiceArea/EditInvoice/EditInvoice";
 
+interface RoutingProps {
+    filters: any;
+}
 
-export function Routing(): JSX.Element {
-
+export function Routing(props: RoutingProps): JSX.Element {
 
     return (
         <div className="Routing">
 
             <Routes>
-                <Route path="/" element={<Main />} />
+
+                <Route path="/" element={<Main filters={props.filters}/>} />
                 <Route path="/no-invoices" element={<EmptyInvoicesList />} />
                 <Route path="/invoice-details/:invoiceId" element={<InvoiceDetails />} />
                 <Route path="/add-invoice" element={<AddInvoice />} />
