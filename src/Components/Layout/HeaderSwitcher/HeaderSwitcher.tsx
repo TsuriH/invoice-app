@@ -1,13 +1,36 @@
 import "./HeaderSwitcher.css"
 import { NavLink, useLocation } from 'react-router-dom';
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { faChevronUp } from '@fortawesome/free-solid-svg-icons'
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-export function HeaderSwitcher(): JSX.Element {
+interface FiltersProps {
+    filterType: Function;
+}
+
+export function HeaderSwitcher(props: FiltersProps): JSX.Element {
+
+    const [filterState, setFilterState] = useState({
+        draft: false,
+        pending: false,
+        paid: false
+    });
+
+    const handleCheckboxChange = (event: any) => {
+        const { value, checked } = event.target;
+        const newFilterState = {
+            ...filterState,
+            [value]: checked
+        };
+        setFilterState(newFilterState)
+    };
+
+    useEffect(()=> {
+      props.filterType(filterState)
+    },[filterState])
 
 
     const location = useLocation();
@@ -48,17 +71,17 @@ export function HeaderSwitcher(): JSX.Element {
                                 <div className="filters-options">
 
                                     <label>
-                                        <input type="checkbox" value="draft" />
+                                        <input type="checkbox" value="draft" onChange={handleCheckboxChange} checked={filterState.draft} />
                                         <span className="option-name">Draft</span>
                                     </label>
 
                                     <label>
-                                        <input type="checkbox" value="pending" />
+                                        <input type="checkbox" value="pending" onChange={handleCheckboxChange} checked={filterState.pending} />
                                         <span className="option-name">Pending</span>
                                     </label>
 
                                     <label>
-                                        <input type="checkbox" value="paid" />
+                                        <input type="checkbox" value="paid" onChange={handleCheckboxChange} checked={filterState.paid} />
                                         <span className="option-name">Paid</span>
                                     </label>
 
@@ -68,12 +91,12 @@ export function HeaderSwitcher(): JSX.Element {
 
                         </div>
 
-                        <button className="new-invoice-btn">
+                        <NavLink className="new-invoice-btn" to="/add-invoice">
                             <div className="icon-plus">
                                 <FontAwesomeIcon icon={faPlus} />
                             </div>
                             <p className="action-description">New <span>Invoice</span></p>
-                        </button>
+                        </NavLink>
 
                     </div>
                     : (<button className="back-btn" style={
@@ -81,8 +104,9 @@ export function HeaderSwitcher(): JSX.Element {
                             ? { background: "" }
                             : { background: "white" }
                     }>
-                        <FontAwesomeIcon icon={faChevronLeft} style={{ color: "var(--purple)" }} />
-                        <NavLink to="/" className="go-back-btn">Go back</NavLink>
+
+                        <NavLink to="/" className="go-back-btn">
+                            <FontAwesomeIcon icon={faChevronLeft} style={{ color: "var(--purple)" }} />Go back</NavLink>
                     </button>)
 
             }

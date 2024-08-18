@@ -3,6 +3,7 @@ import { InvoiceCard } from "../../InvoiceArea/InvoiceCard/InvoiceCard"
 import invoicesDataArray from "../../../data.json"
 
 
+
 export function Main(): JSX.Element {
 
 
@@ -16,11 +17,13 @@ export function Main(): JSX.Element {
                     date={invoice.paymentDue}
                     price={invoice.items[0].total}
                     client={invoice.clientName}
-                    status={invoice.status} />
+                    status={invoice.status}
+                />
                 )
                 )}
 
             </div>
+
         </div >
     )
 }

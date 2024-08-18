@@ -198,8 +198,6 @@ export function InvoiceDetails(): JSX.Element {
 
             {/* invoice actions for tablet an above */}
 
-
-
             <div className="invoice-detailes">
 
             </div>
