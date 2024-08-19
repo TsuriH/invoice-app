@@ -122,7 +122,9 @@ select {
 }
 
 .AddInvoice .inputs-container {
-margin-bottom: 1rem;}
+    margin-bottom: 1rem;
+    align-items: flex-end;
+}
 
 .AddInvoice input[type="number"] {
     -moz-appearance: textfield;
@@ -194,7 +196,7 @@ margin-bottom: 1rem;}
 }
 
 .AddInvoice .discard-btn {
-   color: var(--grayish-blue);
+    color: var(--grayish-blue);
 }
 
 
@@ -218,7 +220,7 @@ margin-bottom: 1rem;}
 
     .AddInvoice .more-headers {
         display: grid;
-        grid-template-columns: 0.5fr 1fr 1fr 1fr ;
+        grid-template-columns: 0.5fr 1fr 1fr 1fr;
     }
 
     .AddInvoice .items-container {

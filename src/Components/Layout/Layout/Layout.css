@@ -1,12 +1,13 @@
 .Layout {
-    height: 100vh;
     display: flex;
     flex-direction: column;
     background-color: var(--very-light-grey);
+
 }
 
 .Layout main {
     flex: 1;
+    height: 100%
 }
 
 .Layout .spacer {
