@@ -1,12 +1,16 @@
 import "./Main.css"
 import { InvoiceCard } from "../../InvoiceArea/InvoiceCard/InvoiceCard"
 import invoicesDataArray from "../../../data.json"
+import { useEffect } from "react";
 
 interface MainProps {
     filters: any;
+    updateInvoicesCount: Function;
 }
 
 export function Main(props: MainProps): JSX.Element {
+
+
 
     // Get the active filters if there are there
     const activeFilters = Object.entries(props.filters).filter(([k, v]) => {
@@ -23,6 +27,9 @@ export function Main(props: MainProps): JSX.Element {
         : invoicesDataArray.filter(invoice => activeFiltersOnlyKeys.includes(invoice.status))
 
 
+    useEffect(() => {
+        props.updateInvoicesCount(filterInvoicesDataArray.length);
+    }, [filterInvoicesDataArray, props.updateInvoicesCount]);
 
     return (
         <div className="Main">

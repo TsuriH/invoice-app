@@ -7,6 +7,7 @@ import { EditInvoice } from "../../InvoiceArea/EditInvoice/EditInvoice";
 
 interface RoutingProps {
     filters: any;
+    updateInvoicesCount: Function;
 }
 
 export function Routing(props: RoutingProps): JSX.Element {
@@ -16,13 +17,14 @@ export function Routing(props: RoutingProps): JSX.Element {
 
             <Routes>
 
-                <Route path="/" element={<Main filters={props.filters}/>} />
+                <Route path="/" element={<Main filters={props.filters}  updateInvoicesCount={props.updateInvoicesCount} />} />
                 <Route path="/no-invoices" element={<EmptyInvoicesList />} />
                 <Route path="/invoice-details/:invoiceId" element={<InvoiceDetails />} />
                 <Route path="/add-invoice" element={<AddInvoice />} />
                 <Route path="/edit-invoice" element={<EditInvoice />} />
 
             </Routes>
+
 
         </div>
     )

@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 interface FiltersProps {
     filterType: Function;
+    invoicesCount: number;
 }
 
 export function HeaderSwitcher(props: FiltersProps): JSX.Element {
@@ -28,9 +29,9 @@ export function HeaderSwitcher(props: FiltersProps): JSX.Element {
         setFilterState(newFilterState)
     };
 
-    useEffect(()=> {
-      props.filterType(filterState)
-    },[filterState])
+    useEffect(() => {
+        props.filterType(filterState)
+    }, [filterState])
 
 
     const location = useLocation();
@@ -49,8 +50,8 @@ export function HeaderSwitcher(props: FiltersProps): JSX.Element {
 
                         <div className="invoices-quantity">
                             <h2 className="invoices">Invoices</h2>
-                            <p className="invoices-total-short-version"> 4 invoices</p>
-                            <p className="invoices-total-long-version"> There are 4 total invoices</p>
+                            <p className="invoices-total-short-version"> {props.invoicesCount} invoices</p>
+                            <p className="invoices-total-long-version"> There are {props.invoicesCount}  total invoices</p>
                         </div>
 
                         <div className="filter-container">
