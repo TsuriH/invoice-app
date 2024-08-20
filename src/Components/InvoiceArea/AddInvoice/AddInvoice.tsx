@@ -2,6 +2,7 @@ import "./AddInvoice.css"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faTrash } from "@fortawesome/free-solid-svg-icons"
 import { useForm, SubmitHandler } from "react-hook-form"
+import invoicesDataArray from "../../../data.json"
 
 export function AddInvoice(): JSX.Element {
     const {
@@ -11,6 +12,37 @@ export function AddInvoice(): JSX.Element {
     } = useForm()
 
     const onSubmit = (data: any) => console.log(data)
+
+    const invoiceIdGenerator = () => {
+        const lettersArray = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+        const numbersArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
+        const newIdRaw: any = ["#"]
+
+        for (let i = 0; i < 2; i++) {
+            const randomNumber = Math.floor(Math.random() * 10);
+            newIdRaw.push(lettersArray[randomNumber].toUpperCase())
+        }
+
+        for (let i = 0; i < 4; i++) {
+            const randomNumber = Math.floor(Math.random() * 10);
+            newIdRaw.push(numbersArray[randomNumber])
+        }
+
+        const newId = newIdRaw.toString();
+        return newId;
+    }
+
+    // Recursively call the function if a duplicate is found
+    const validatedInvoiceId = () => {
+
+        const newId = invoiceIdGenerator();
+
+        if (invoicesDataArray.some(invoice => invoice.id === newId)) {
+            return validatedInvoiceId();
+        }
+        return newId;
+    }
+
 
     return (
         <div className="AddInvoice">
@@ -38,15 +70,15 @@ export function AddInvoice(): JSX.Element {
                             </label>
 
                             <label htmlFor="" className="post-code">Post Code
-                            <input type="text" {...register("senderPostCode", { required: "This filed is required" })} />
-                            <p>{errors.senderPostCode?.message as string}</p>
+                                <input type="text" {...register("senderPostCode", { required: "This filed is required" })} />
+                                <p>{errors.senderPostCode?.message as string}</p>
                             </label>
 
                         </div>
 
                         <label htmlFor="" className="country">Country
-                            
-                            <input {...register("sendeCountry", { required:  "This filed is required" })} />
+
+                            <input {...register("sendeCountry", { required: "This filed is required" })} />
                             <p>{errors.sendeCountry?.message as string}</p>
                         </label>
 
@@ -59,13 +91,13 @@ export function AddInvoice(): JSX.Element {
                     <p className="bill-to headline">Bill To</p>
 
                     <label htmlFor="" className="client-name">Client's Name
-                        <input {...register("clientName", { required:  "This filed is required" })} />
+                        <input {...register("clientName", { required: "This filed is required" })} />
                         <p>{errors.clientName?.message as string}</p>
 
                     </label>
 
                     <label htmlFor="" className="client-email">Client's Email
-                        <input {...register("clientEmail", { required:  "This filed is required" })} />
+                        <input {...register("clientEmail", { required: "This filed is required" })} />
                         <p>{errors.clientEmail?.message as string}</p>
 
                     </label>

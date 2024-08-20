@@ -11,6 +11,7 @@
 h3,
 .items-container {
     padding: 0rem 2rem;
+    margin-top: 2rem;
 }
 
 .AddInvoice .headline {
@@ -202,6 +203,10 @@ select {
 
 .AddInvoice .header-row {
     display: none;
+}
+
+.AddInvoice label>p {
+    color: red;
 }
 
 /* RESPONSIVE */
