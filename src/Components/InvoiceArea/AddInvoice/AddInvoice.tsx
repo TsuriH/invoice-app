@@ -3,15 +3,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faTrash } from "@fortawesome/free-solid-svg-icons"
 import { useForm, SubmitHandler } from "react-hook-form"
 import invoicesDataArray from "../../../data.json"
+import InvoiceModel from "../../model/InvoiceModel"
 
 export function AddInvoice(): JSX.Element {
     const {
         register,
         handleSubmit,
         formState: { errors },
-    } = useForm()
-
-    const onSubmit = (data: any) => console.log(data)
+    } = useForm<InvoiceModel>()
 
     const invoiceIdGenerator = () => {
         const lettersArray = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
@@ -43,6 +42,10 @@ export function AddInvoice(): JSX.Element {
         return newId;
     }
 
+    const onSubmit = (data: InvoiceModel) => {
+        console.log(data)
+        
+    }
 
     return (
         <div className="AddInvoice">
@@ -56,8 +59,8 @@ export function AddInvoice(): JSX.Element {
                     <p className="bill-from headline">Bill From</p>
 
                     <label htmlFor="" className="street">Street Address
-                        <input {...register("senderStreetAddress", { required: "This filed is required" })} />
-                        <p>{errors.senderStreetAddress?.message as string}</p>
+                        <input {...register("senderAddress.street", { required: "This filed is required" })} />
+                        <p>{errors.senderAddress?.street?.message}</p>
                     </label>
 
                     <div className="detailed-address">
@@ -65,21 +68,21 @@ export function AddInvoice(): JSX.Element {
                         <div className="city-and-post-container">
 
                             <label htmlFor="" className="city">City
-                                <input type="text" {...register("senderCity", { required: "This filed is required" })} />
-                                <p>{errors.senderCity?.message as string}</p>
+                                <input type="text" {...register("senderAddress.city", { required: "This filed is required" })} />
+                                <p>{errors.senderAddress?.city?.message }</p>
                             </label>
 
                             <label htmlFor="" className="post-code">Post Code
-                                <input type="text" {...register("senderPostCode", { required: "This filed is required" })} />
-                                <p>{errors.senderPostCode?.message as string}</p>
+                                <input type="text" {...register("senderAddress.postCode", { required: "This filed is required" })} />
+                                <p>{errors.senderAddress?.postCode?.message}</p>
                             </label>
 
                         </div>
 
                         <label htmlFor="" className="country">Country
 
-                            <input {...register("sendeCountry", { required: "This filed is required" })} />
-                            <p>{errors.sendeCountry?.message as string}</p>
+                            <input {...register("senderAddress.country", { required: "This filed is required" })} />
+                            <p>{errors.senderAddress?.country?.message}</p>
                         </label>
 
                     </div>
@@ -92,19 +95,19 @@ export function AddInvoice(): JSX.Element {
 
                     <label htmlFor="" className="client-name">Client's Name
                         <input {...register("clientName", { required: "This filed is required" })} />
-                        <p>{errors.clientName?.message as string}</p>
+                        <p>{errors.clientName?.message}</p>
 
                     </label>
 
                     <label htmlFor="" className="client-email">Client's Email
                         <input {...register("clientEmail", { required: "This filed is required" })} />
-                        <p>{errors.clientEmail?.message as string}</p>
+                        <p>{errors.clientEmail?.message}</p>
 
                     </label>
 
                     <label htmlFor="" className="street-address">Street Address
-                        <input {...register("clientStreetAddress", { required: "This filed is required" })} />
-                        <p>{errors.clientStreetAddress?.message as string}</p>
+                        <input {...register("clientAddress.street", { required: "This filed is required" })} />
+                        <p>{errors.senderAddress?.street?.message}</p>
                     </label>
 
                     <div className="city-country-container">
@@ -112,22 +115,22 @@ export function AddInvoice(): JSX.Element {
                         <div className="city-and-post-container">
 
                             <label htmlFor="" className="city">City
-                                <input {...register("clientCity", { required: "This filed is required" })} />
-                                <p>{errors.clientCity?.message as string}</p>
+                                <input {...register("clientAddress.city", { required: "This filed is required" })} />
+                                <p>{errors.clientAddress?.city?.message}</p>
 
                             </label>
 
                             <label htmlFor="" className="post-code">Post Code
-                                <input {...register("clientPostCode", { required: "This filed is required" })} />
-                                <p>{errors.clientPostCode?.message as string}</p>
+                                <input {...register("clientAddress.postCode", { required: "This filed is required" })} />
+                                <p>{errors.clientAddress?.postCode?.message}</p>
 
                             </label>
 
                         </div>
 
                         <label htmlFor="" className="country">Country
-                            <input {...register("clientCountry", { required: "This filed is required" })} />
-                            <p>{errors.clientCountry?.message as string}</p>
+                            <input {...register("clientAddress.country", { required: "This filed is required" })} />
+                            <p>{errors.clientAddress?.country?.message}</p>
 
                         </label>
 
@@ -138,8 +141,8 @@ export function AddInvoice(): JSX.Element {
                         <div className="invoice-date-container">
 
                             <label htmlFor="" className="invoice-date">Invoice Date
-                                <input {...register("invoiceDate", { required: "This filed is required" })} />
-                                <p>{errors.invoiceDate?.message as string}</p>
+                                <input {...register("createdAt", { required: "This filed is required" })} />
+                                <p>{errors.createdAt?.message}</p>
 
                             </label>
 
@@ -155,8 +158,8 @@ export function AddInvoice(): JSX.Element {
                         </div>
 
                         <label htmlFor="" className="project-name">Project Description
-                            <input {...register("projectName", { required: "This filed is required" })} />
-                            <p>{errors.projectName?.message as string}</p>
+                            <input {...register("description", { required: "This filed is required" })} />
+                            <p>{errors.description?.message}</p>
 
                         </label>
 
@@ -187,9 +190,8 @@ export function AddInvoice(): JSX.Element {
                             <div className="item-name-input-container item-container">
 
                                 <p className="mobile-header-input">Item Name</p>
-                                <input {...register("itemName", { required: "This filed is required" })} className="mobile-single-row" />
-                                <p>{errors.itemName?.message as string}</p>
-
+                                <input {...register("items.0.name", { required: "This filed is required" })} className="mobile-single-row" />
+                                {/* <p>{errors.items[0]?.name?.message}</p> */}
 
                             </div>
 
@@ -197,14 +199,14 @@ export function AddInvoice(): JSX.Element {
 
                                 <div className="quantity-input-container item-container" >
                                     <p className="mobile-header-input">Qty.</p>
-                                    <input {...register("qty", { required: "This filed is required" })} className="mobile-single-row" />
-                                    <p>{errors.qty?.message as string}</p>
+                                    <input {...register("items", { required: "This filed is required" })} className="mobile-single-row" />
+                                    {/* <p>{errors.items?.[0]?.quantity.message}</p> */}
                                 </div>
 
                                 <div className="Price-input-container item-container">
                                     <p className="mobile-header-input">Price</p>
-                                    <input {...register("price", { required: "This filed is required" })} className="mobile-single-row" />
-                                    <p>{errors.price?.message as string}</p>
+                                    <input {...register("items", { required: "This filed is required" })} className="mobile-single-row" />
+                                    {/* <p>{errors.itemPrice?.message}</p> */}
                                 </div>
 
                                 <div className="Price-input-container item-container">
