@@ -72,7 +72,6 @@ select {
     width: 100%;
 }
 
-
 .AddInvoice .item-row {
     display: flex;
     flex-direction: column;
@@ -105,6 +104,10 @@ select {
     color: var(--grayish-lavender);
 }
 
+.AddInvoice .inputs-container .bin-btn:hover {
+    cursor: pointer;
+}
+
 .AddInvoice .item-row .item-container>input,
 .item-total {
     padding: 15px;
@@ -126,6 +129,8 @@ select {
     margin-bottom: 1rem;
     align-items: flex-end;
 }
+
+
 
 .AddInvoice input[type="number"] {
     -moz-appearance: textfield;
@@ -212,16 +217,21 @@ select {
 /* RESPONSIVE */
 
 @media (min-width: 700px) {
-    .AddInvoice {}
 
     .AddInvoice .item-row {
         display: flex;
         flex-direction: column;
     }
 
-    .AddInvoice .item-container>p {
+    .AddInvoice .mobile-header-input {
         display: none;
     }
+
+    .AddInvoice .item-total {
+        display: block;
+    }
+
+
 
     .AddInvoice .more-headers {
         display: grid;
@@ -248,6 +258,10 @@ select {
         display: grid;
         grid-template-columns: 0.45fr 1fr;
         gap: 2rem;
+    }
+
+    .AddInvoice .space-filler {
+        display: none;
     }
 
 }

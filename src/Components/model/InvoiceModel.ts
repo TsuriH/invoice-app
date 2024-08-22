@@ -19,14 +19,13 @@ class InvoiceModel {
         postCode: number;
         country: string;
     };
-    items: [
-        {
-            name: string;
-            quantity: number;
-            price: number;
-            total: number;
-        }
-    ];
+    items: {
+        name: string;
+        quantity: number;
+        price: number;
+        total: number;
+    }[];
+    
     total: string;
 }
 

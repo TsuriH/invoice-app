@@ -4,19 +4,31 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons"
 import { useForm, SubmitHandler, useFieldArray } from "react-hook-form"
 import invoicesDataArray from "../../../data.json"
 import InvoiceModel from "../../model/InvoiceModel"
-import { useState } from "react"
+import { useWatch } from "react-hook-form";
+
 
 export function AddInvoice(): JSX.Element {
+
 
     const {
         register,
         handleSubmit,
         control,
         formState: { errors },
-    } = useForm<InvoiceModel>({defaultValues: {items:[{ name: '', quantity: 1, price: 0, total: 0 }]}})
+        getValues
+    } = useForm<InvoiceModel>({ defaultValues: { items: [{ name: '', quantity: 1, price: 0, total: 0 }] } })
 
+    const { fields, append, remove } = useFieldArray({ control, name: "items" });
 
-    const { fields, append, remove } = useFieldArray({control, name: "items" });
+    const watchedItems = useWatch({ control, name: "items" });
+
+    const updateTotal = (index: number) => {
+        const quantity = getValues(`items.${index}.quantity`);
+        const price = getValues(`items.${index}.price`);
+        const total = quantity * price;
+        return total;
+    };
+
 
     const invoiceIdGenerator = () => {
         const lettersArray = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
@@ -190,16 +202,17 @@ export function AddInvoice(): JSX.Element {
 
                         </div>
 
-                        {fields.map(() => {
+                        {fields.map((filed, index) => {
+
                             return (<>
 
-                                <div className="inputs-container">
+                                <div className="inputs-container" key={filed.id}>
 
 
-                                    <div className="item-name-input-container item-container">
+                                    <div className="item-name-input-container item-container" >
 
                                         <p className="mobile-header-input">Item Name</p>
-                                        <input {...register(`items.0.name`, { required: "This filed is required" })} className="mobile-single-row" />
+                                        <input {...register(`items.${index}.name`, { required: "This filed is required" })} className="mobile-single-row" />
                                         {/* <p>{errors.items[0]?.name?.message}</p> */}
 
                                     </div>
@@ -208,52 +221,47 @@ export function AddInvoice(): JSX.Element {
 
                                         <div className="quantity-input-container item-container" >
                                             <p className="mobile-header-input">Qty.</p>
-                                            <input {...register("items", { required: "This filed is required" })} className="mobile-single-row" />
+                                            <input {...register(`items.${index}.quantity`, { required: "This filed is required" })} className="mobile-single-row" onChange={() => updateTotal(index)} />
                                             {/* <p>{errors.items?.[0]?.quantity.message}</p> */}
                                         </div>
 
                                         <div className="Price-input-container item-container">
                                             <p className="mobile-header-input">Price</p>
-                                            <input {...register("items", { required: "This filed is required" })} className="mobile-single-row" />
+                                            <input {...register(`items.${index}.price`, { required: "This filed is required" })} className="mobile-single-row" onChange={() => updateTotal(index)} />
                                             {/* <p>{errors.itemPrice?.message}</p> */}
                                         </div>
 
                                         <div className="Price-input-container item-container">
                                             <p className="mobile-header-input">Total</p>
-                                            <p className="item-total" style={{ color: "var(--grayish-lavender)", fontWeight: "700", fontSize: "1.5rem" }}>156.00</p>
+                                            <p className="item-total" style={{ color: "var(--grayish-lavender)", fontWeight: "700", fontSize: "1.5rem" }}>{updateTotal(index)}</p>
                                         </div>
 
                                         <div className="item-bin-container item-container">
-                                            <p className="space-filler ">fill</p>
-                                            <FontAwesomeIcon icon={faTrash} style={{ color: "var(--grayish-lavender)", fontSize: "1.8rem" }} />
+                                            <p className="space-filler">fill</p>
+                                            <FontAwesomeIcon icon={faTrash} style={{ color: "var(--grayish-lavender)", fontSize: "1.8rem" }} onClick={() => remove(index)} className="bin-btn" />
                                         </div>
 
                                     </div>
-
 
                                 </div>
                             </>)
                         })}
 
-
-
-
-
                     </div>
 
-                    <button className="add-new-item-btn" onClick={(e)=>{
+                    <button className="add-new-item-btn" onClick={(e) => {
                         e.preventDefault()
-                        append({ name: '', quantity: 1, price: 0, total: 0 })}
+                        append({ name: '', quantity: 1, price: 0, total: 0 })
+                    }
                     } >+ Add New Item</button>
                 </div>
-
-
 
                 <div className="new-buttons-container">
                     <button className="discard-btn">Discard</button>
                     <button className="draft-btn">Save as Draft</button>
                     <input type="submit" className="save-btn" value="Save & Send" />
                 </div>
+
             </form>
         </div>
     )
