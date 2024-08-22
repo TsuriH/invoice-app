@@ -1,16 +1,22 @@
 import "./AddInvoice.css"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faTrash } from "@fortawesome/free-solid-svg-icons"
-import { useForm, SubmitHandler } from "react-hook-form"
+import { useForm, SubmitHandler, useFieldArray } from "react-hook-form"
 import invoicesDataArray from "../../../data.json"
 import InvoiceModel from "../../model/InvoiceModel"
+import { useState } from "react"
 
 export function AddInvoice(): JSX.Element {
+
     const {
         register,
         handleSubmit,
+        control,
         formState: { errors },
-    } = useForm<InvoiceModel>()
+    } = useForm<InvoiceModel>({defaultValues: {items:[{ name: '', quantity: 1, price: 0, total: 0 }]}})
+
+
+    const { fields, append, remove } = useFieldArray({control, name: "items" });
 
     const invoiceIdGenerator = () => {
         const lettersArray = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
@@ -44,7 +50,6 @@ export function AddInvoice(): JSX.Element {
 
     const onSubmit = (data: InvoiceModel) => {
         console.log(data)
-        
     }
 
     return (
@@ -69,7 +74,7 @@ export function AddInvoice(): JSX.Element {
 
                             <label htmlFor="" className="city">City
                                 <input type="text" {...register("senderAddress.city", { required: "This filed is required" })} />
-                                <p>{errors.senderAddress?.city?.message }</p>
+                                <p>{errors.senderAddress?.city?.message}</p>
                             </label>
 
                             <label htmlFor="" className="post-code">Post Code
@@ -185,49 +190,61 @@ export function AddInvoice(): JSX.Element {
 
                         </div>
 
-                        <div className="inputs-container">
+                        {fields.map(() => {
+                            return (<>
 
-                            <div className="item-name-input-container item-container">
+                                <div className="inputs-container">
 
-                                <p className="mobile-header-input">Item Name</p>
-                                <input {...register("items.0.name", { required: "This filed is required" })} className="mobile-single-row" />
-                                {/* <p>{errors.items[0]?.name?.message}</p> */}
 
-                            </div>
+                                    <div className="item-name-input-container item-container">
 
-                            <div className="lower-item-info">
+                                        <p className="mobile-header-input">Item Name</p>
+                                        <input {...register(`items.0.name`, { required: "This filed is required" })} className="mobile-single-row" />
+                                        {/* <p>{errors.items[0]?.name?.message}</p> */}
 
-                                <div className="quantity-input-container item-container" >
-                                    <p className="mobile-header-input">Qty.</p>
-                                    <input {...register("items", { required: "This filed is required" })} className="mobile-single-row" />
-                                    {/* <p>{errors.items?.[0]?.quantity.message}</p> */}
+                                    </div>
+
+                                    <div className="lower-item-info">
+
+                                        <div className="quantity-input-container item-container" >
+                                            <p className="mobile-header-input">Qty.</p>
+                                            <input {...register("items", { required: "This filed is required" })} className="mobile-single-row" />
+                                            {/* <p>{errors.items?.[0]?.quantity.message}</p> */}
+                                        </div>
+
+                                        <div className="Price-input-container item-container">
+                                            <p className="mobile-header-input">Price</p>
+                                            <input {...register("items", { required: "This filed is required" })} className="mobile-single-row" />
+                                            {/* <p>{errors.itemPrice?.message}</p> */}
+                                        </div>
+
+                                        <div className="Price-input-container item-container">
+                                            <p className="mobile-header-input">Total</p>
+                                            <p className="item-total" style={{ color: "var(--grayish-lavender)", fontWeight: "700", fontSize: "1.5rem" }}>156.00</p>
+                                        </div>
+
+                                        <div className="item-bin-container item-container">
+                                            <p className="space-filler ">fill</p>
+                                            <FontAwesomeIcon icon={faTrash} style={{ color: "var(--grayish-lavender)", fontSize: "1.8rem" }} />
+                                        </div>
+
+                                    </div>
+
+
                                 </div>
+                            </>)
+                        })}
 
-                                <div className="Price-input-container item-container">
-                                    <p className="mobile-header-input">Price</p>
-                                    <input {...register("items", { required: "This filed is required" })} className="mobile-single-row" />
-                                    {/* <p>{errors.itemPrice?.message}</p> */}
-                                </div>
 
-                                <div className="Price-input-container item-container">
-                                    <p className="mobile-header-input">Total</p>
-                                    <p className="item-total" style={{ color: "var(--grayish-lavender)", fontWeight: "700", fontSize: "1.5rem" }}>156.00</p>
-                                </div>
-
-                                <div className="item-bin-container item-container">
-                                    <p className="space-filler ">fill</p>
-                                    <FontAwesomeIcon icon={faTrash} style={{ color: "var(--grayish-lavender)", fontSize: "1.8rem" }} />
-                                </div>
-
-                            </div>
-
-                        </div>
 
 
 
                     </div>
 
-                    <button className="add-new-item-btn">+ Add New Item</button>
+                    <button className="add-new-item-btn" onClick={(e)=>{
+                        e.preventDefault()
+                        append({ name: '', quantity: 1, price: 0, total: 0 })}
+                    } >+ Add New Item</button>
                 </div>
 
 
