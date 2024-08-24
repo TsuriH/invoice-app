@@ -1,32 +1,62 @@
 import "./AddInvoice.css"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faTrash } from "@fortawesome/free-solid-svg-icons"
-import { useForm, SubmitHandler, useFieldArray } from "react-hook-form"
+import { useForm, SubmitHandler, useFieldArray, Controller } from "react-hook-form"
 import invoicesDataArray from "../../../data.json"
 import InvoiceModel from "../../model/InvoiceModel"
 import { useWatch } from "react-hook-form";
+import { useEffect, useState } from "react"
 
 
 export function AddInvoice(): JSX.Element {
 
+
+    const [totals, setTotals] = useState<number[]>([0]);
+    const [valueChanged,setValueChanged] = useState(false)
+    // const [price, setPrice] = useState<number[]>([0]);
+    // const [qt, setQt] = useState<number[]>([1]);
+
+ 
 
     const {
         register,
         handleSubmit,
         control,
         formState: { errors },
-        getValues
-    } = useForm<InvoiceModel>({ defaultValues: { items: [{ name: '', quantity: 1, price: 0, total: 0 }] } })
+        getValues,
+        watch
+    } = useForm<InvoiceModel>({ defaultValues: { items: [{ name: '', quantity: 1, price: 0  }] } })
 
     const { fields, append, remove } = useFieldArray({ control, name: "items" });
+    const items = watch("items");
 
-    const watchedItems = useWatch({ control, name: "items" });
+    useEffect(() => {
 
-    const updateTotal = (index: number) => {
-        const quantity = getValues(`items.${index}.quantity`);
-        const price = getValues(`items.${index}.price`);
-        const total = quantity * price;
-        return total;
+        console.log(items,"items")
+        const newTotals = items.map(item => item.quantity * item.price);
+        setTotals(newTotals);
+      }, [items,valueChanged]);
+
+
+    // const updateTotal = (index: number) => {
+    //     const quantity = getValues(`items.${index}.quantity`);
+    //     const price = getValues(`items.${index}.price`);
+    //     const total = quantity * price;
+    //     return total;
+    // };
+
+
+    const updateTotal = (e: any, index: number) => {
+        // const value = e.target.value
+        // const quantity = getValues(`items.${index}.quantity`);
+        // const price = getValues(`items.${index}.price`);
+        // const newTotal = quantity * price;
+        // console.log(`i: ${value}, p: ${price}, q: ${quantity}`)
+        // setTotals(prevTotals => {
+        //     const updatedTotals = [...prevTotals];
+        //     updatedTotals[index] = newTotal;
+        //     return updatedTotals;
+        // });
     };
 
 
@@ -201,57 +231,55 @@ export function AddInvoice(): JSX.Element {
                             </div>
 
                         </div>
+                        
+                        {fields.map((item, index) => (
+                            <div key={item.id}>
+                                <Controller
+                                    control={control}
+                                    name={`items.${index}.quantity`}
+                                    rules={{ required: "This field is required" }}
+                                    render={({ field: { onChange, value } }) => (
+                                        <input
+                                            className="mobile-single-row"
+                                            type="number"
+                                            value={value}
+                                            onChange={(e) => {
+                                                setValueChanged(!valueChanged)
+                                                onChange(e); // Register change with React Hook Form
+                                                // Optionally: additional logic for handling change
+                                            }}
+                                        />
+                                    )}
+                                />
+                                <Controller
+                                    control={control}
+                                    name={`items.${index}.price`}
+                                    rules={{ required: "This field is required" }}
+                                    render={({ field: { onChange, value } }) => (
+                                        <input
+                                            className="mobile-single-row"
+                                            type="number"
+                                            value={value}
+                                            onChange={(e) => {
+                                                setValueChanged(!valueChanged)
 
-                        {fields.map((filed, index) => {
+                                                onChange(e); // Register change with React Hook Form
+                                                // Optionally: additional logic for handling change
+                                            }}
+                                        />
+                                    )}
+                                />
+                                <div>Total for Item {index + 1}: {totals[index] || 0}</div>
+                            </div>
+                        ))}
 
-                            return (<>
-
-                                <div className="inputs-container" key={filed.id}>
-
-
-                                    <div className="item-name-input-container item-container" >
-
-                                        <p className="mobile-header-input">Item Name</p>
-                                        <input {...register(`items.${index}.name`, { required: "This filed is required" })} className="mobile-single-row" />
-                                        {/* <p>{errors.items[0]?.name?.message}</p> */}
-
-                                    </div>
-
-                                    <div className="lower-item-info">
-
-                                        <div className="quantity-input-container item-container" >
-                                            <p className="mobile-header-input">Qty.</p>
-                                            <input {...register(`items.${index}.quantity`, { required: "This filed is required" })} className="mobile-single-row" onChange={() => updateTotal(index)} />
-                                            {/* <p>{errors.items?.[0]?.quantity.message}</p> */}
-                                        </div>
-
-                                        <div className="Price-input-container item-container">
-                                            <p className="mobile-header-input">Price</p>
-                                            <input {...register(`items.${index}.price`, { required: "This filed is required" })} className="mobile-single-row" onChange={() => updateTotal(index)} />
-                                            {/* <p>{errors.itemPrice?.message}</p> */}
-                                        </div>
-
-                                        <div className="Price-input-container item-container">
-                                            <p className="mobile-header-input">Total</p>
-                                            <p className="item-total" style={{ color: "var(--grayish-lavender)", fontWeight: "700", fontSize: "1.5rem" }}>{updateTotal(index)}</p>
-                                        </div>
-
-                                        <div className="item-bin-container item-container">
-                                            <p className="space-filler">fill</p>
-                                            <FontAwesomeIcon icon={faTrash} style={{ color: "var(--grayish-lavender)", fontSize: "1.8rem" }} onClick={() => remove(index)} className="bin-btn" />
-                                        </div>
-
-                                    </div>
-
-                                </div>
-                            </>)
-                        })}
+                 
 
                     </div>
 
                     <button className="add-new-item-btn" onClick={(e) => {
                         e.preventDefault()
-                        append({ name: '', quantity: 1, price: 0, total: 0 })
+                        append({ name: '', quantity: 1, price: 0})
                     }
                     } >+ Add New Item</button>
                 </div>

@@ -165,6 +165,10 @@ select {
     margin-top: 5rem;
 }
 
+.AddInvoice .add-new-item-btn:hover {
+    cursor: pointer;
+}
+
 .AddInvoice .new-buttons-container {
     display: flex;
     gap: 1rem;

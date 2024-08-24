@@ -23,7 +23,7 @@ class InvoiceModel {
         name: string;
         quantity: number;
         price: number;
-        total: number;
+        // total: number;
     }[];
     
     total: string;
