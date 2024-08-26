@@ -1,10 +1,9 @@
 import "./AddInvoice.css"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faTrash } from "@fortawesome/free-solid-svg-icons"
-import { useForm, SubmitHandler, useFieldArray, Controller } from "react-hook-form"
+import { useForm, useFieldArray, Controller } from "react-hook-form"
 import invoicesDataArray from "../../../data.json"
 import InvoiceModel from "../../model/InvoiceModel"
-import { useWatch } from "react-hook-form";
 import { useEffect, useState } from "react"
 
 
@@ -12,53 +11,27 @@ export function AddInvoice(): JSX.Element {
 
 
     const [totals, setTotals] = useState<number[]>([0]);
-    const [valueChanged,setValueChanged] = useState(false)
-    // const [price, setPrice] = useState<number[]>([0]);
-    // const [qt, setQt] = useState<number[]>([1]);
 
- 
+    const [valueChanged, setValueChanged] = useState(false)
 
     const {
         register,
         handleSubmit,
         control,
         formState: { errors },
-        getValues,
         watch
-    } = useForm<InvoiceModel>({ defaultValues: { items: [{ name: '', quantity: 1, price: 0  }] } })
+    } = useForm<InvoiceModel>({ defaultValues: { items: [{ name: '', quantity: 1, price: 0 }] } })
 
     const { fields, append, remove } = useFieldArray({ control, name: "items" });
+
     const items = watch("items");
 
     useEffect(() => {
 
-        console.log(items,"items")
+        console.log(items, "items")
         const newTotals = items.map(item => item.quantity * item.price);
         setTotals(newTotals);
-      }, [items,valueChanged]);
-
-
-    // const updateTotal = (index: number) => {
-    //     const quantity = getValues(`items.${index}.quantity`);
-    //     const price = getValues(`items.${index}.price`);
-    //     const total = quantity * price;
-    //     return total;
-    // };
-
-
-    const updateTotal = (e: any, index: number) => {
-        // const value = e.target.value
-        // const quantity = getValues(`items.${index}.quantity`);
-        // const price = getValues(`items.${index}.price`);
-        // const newTotal = quantity * price;
-        // console.log(`i: ${value}, p: ${price}, q: ${quantity}`)
-        // setTotals(prevTotals => {
-        //     const updatedTotals = [...prevTotals];
-        //     updatedTotals[index] = newTotal;
-        //     return updatedTotals;
-        // });
-    };
-
+    }, [items, valueChanged]);
 
     const invoiceIdGenerator = () => {
         const lettersArray = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
@@ -231,26 +204,33 @@ export function AddInvoice(): JSX.Element {
                             </div>
 
                         </div>
-                        
+
                         {fields.map((item, index) => (
-                            <div key={item.id}>
+
+                            <div key={item.id} className="single-item">
+
+                                <input
+                                    id="name"
+                                    {...register(`items.${index}.name`, { required: 'Item name is required' })}
+                                />
+
                                 <Controller
                                     control={control}
                                     name={`items.${index}.quantity`}
                                     rules={{ required: "This field is required" }}
                                     render={({ field: { onChange, value } }) => (
                                         <input
-                                            className="mobile-single-row"
+
                                             type="number"
                                             value={value}
                                             onChange={(e) => {
                                                 setValueChanged(!valueChanged)
-                                                onChange(e); // Register change with React Hook Form
-                                                // Optionally: additional logic for handling change
+                                                onChange(e);
                                             }}
                                         />
                                     )}
                                 />
+
                                 <Controller
                                     control={control}
                                     name={`items.${index}.price`}
@@ -262,26 +242,25 @@ export function AddInvoice(): JSX.Element {
                                             value={value}
                                             onChange={(e) => {
                                                 setValueChanged(!valueChanged)
+                                                onChange(e);
 
-                                                onChange(e); // Register change with React Hook Form
-                                                // Optionally: additional logic for handling change
                                             }}
                                         />
                                     )}
                                 />
+
                                 <div>Total for Item {index + 1}: {totals[index] || 0}</div>
                             </div>
                         ))}
-
-                 
 
                     </div>
 
                     <button className="add-new-item-btn" onClick={(e) => {
                         e.preventDefault()
-                        append({ name: '', quantity: 1, price: 0})
+                        append({ name: '', quantity: 1, price: 0 })
                     }
                     } >+ Add New Item</button>
+
                 </div>
 
                 <div className="new-buttons-container">

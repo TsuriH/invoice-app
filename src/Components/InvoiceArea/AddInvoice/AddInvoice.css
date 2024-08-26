@@ -268,4 +268,9 @@ select {
         display: none;
     }
 
+    .AddInvoice .single-item {
+        border: 2px solid red;
+        display: flex;
+    }
+
 }
