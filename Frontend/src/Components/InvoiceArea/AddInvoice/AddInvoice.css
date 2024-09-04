@@ -1,0 +1,311 @@
+.AddInvoice {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    background-color: white;
+}
+
+.AddInvoice .edit-invoice-head,
+.bill-from-container,
+.bill-to-container,
+h3,
+.items-container {
+    padding: 0rem 2rem;
+    margin-top: 2rem;
+}
+
+.AddInvoice .headline {
+    color: var(--purple);
+    font-weight: 600;
+}
+
+.AddInvoice .bill-from-container,
+.detailed-address,
+.bill-to-container,
+.invoice-date-container,
+.last-details {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+}
+
+.AddInvoice .new-invoice-head {
+    display: flex;
+    font-size: 2rem;
+    font-weight: 600;
+    gap: 0.2rem;
+    padding-left: 2rem;
+
+}
+
+.AddInvoice label {
+    display: flex;
+    flex-direction: column;
+    color: var(--grayish-lavender);
+    gap: 0.5rem;
+}
+
+.AddInvoice label input,
+select {
+    border: none;
+    border: 0.1px solid var(--grayish-lavender);
+    opacity: 0.2;
+    border-radius: 5px;
+    padding: 1rem;
+    width: 100%;
+}
+
+.AddInvoice .city-and-post-container {
+    display: flex;
+    gap: 2rem;
+    width: 100%;
+}
+
+.AddInvoice .city-country-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.AddInvoice .items-container input {
+    width: 100%;
+}
+
+.AddInvoice .item-row {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.AddInvoice .lower-item-info {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+
+    align-items: center;
+}
+
+.AddInvoice .quantity-input-container {
+    flex: 1;
+}
+
+.AddInvoice .Price-input-container {
+    flex: 2;
+}
+
+.AddInvoice .item-header {
+    color: var(--grayish-lavender);
+    margin-top: 5rem;
+}
+
+.AddInvoice .header-row>p,
+.mobile-header-input {
+    color: var(--grayish-lavender);
+}
+
+.AddInvoice .inputs-container .bin-btn:hover {
+    cursor: pointer;
+}
+
+.AddInvoice .item-row .item-container>input,
+.item-total {
+    padding: 15px;
+    border: 1px solid #e0e0e0;
+    text-transform: capitalize;
+    font-weight: 600;
+}
+
+.AddInvoice .item-container .item-row .inputs-container .item-total {
+    border: none;
+    border: 2px solid red;
+}
+
+.AddInvoice .item-total {
+    border: none;
+}
+
+.AddInvoice .inputs-container {
+    margin-bottom: 1rem;
+    align-items: flex-end;
+}
+
+
+
+.AddInvoice input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+.AddInvoice .items-container input {
+    border-radius: 5px;
+}
+
+.AddInvoice .space-filler {
+    visibility: hidden;
+}
+
+
+
+.AddInvoice .item-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+}
+
+.AddInvoice .add-new-item-btn {
+    background: none;
+    border: none;
+    background: var(--very-light-grey);
+    padding: 1.5rem;
+    border-radius: 25px;
+    font-weight: 600;
+    color: var(--grayish-blue);
+    width: 100%;
+    margin-top: 5rem;
+}
+
+.AddInvoice .add-new-item-btn:hover {
+    cursor: pointer;
+}
+
+.AddInvoice .new-buttons-container {
+    display: flex;
+    gap: 1rem;
+    margin-top: 6rem;
+}
+
+
+
+.AddInvoice .new-buttons-container>* {
+    border: none;
+    border-radius: 50px;
+    padding: 1.5rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+
+}
+
+.AddInvoice .draft-btn {
+    color: var(--grayish-lavender);
+    background: var(--dark-grayish-blue);
+}
+
+.AddInvoice .save-btn {
+    background: var(--purple);
+    color: white;
+}
+
+.AddInvoice .new-buttons-container {
+    display: flex;
+    justify-content: flex-end;
+    padding: 1rem 0rem;
+    width: 100%;
+    box-shadow: 0 20px 50px -2px rgba(0, 0, 0, 0.3);
+    padding: 2rem 2rem;
+}
+
+.AddInvoice .discard-btn {
+    color: var(--grayish-blue);
+}
+
+
+.AddInvoice .header-row {
+    display: none;
+}
+
+.AddInvoice label>p {
+    color: red;
+}
+
+/* RESPONSIVE */
+
+@media (min-width: 700px) {
+
+    .AddInvoice .item-row {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .AddInvoice .mobile-header-input {
+        display: none;
+    }
+
+    .AddInvoice .item-total {
+        display: block;
+    }
+
+
+
+    .AddInvoice .more-headers {
+        display: grid;
+        grid-template-columns: 0.5fr 1fr 1fr 1fr;
+    }
+
+    .AddInvoice .items-container {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        align-items: stretch;
+        padding-bottom: 5rem;
+    }
+
+    .AddInvoice .inputs-container .lower-item-info,
+    .more-headers {
+        display: grid;
+        grid-template-columns: 0.5fr 1fr 1fr 1fr;
+        gap: 1rem;
+    }
+
+    .AddInvoice .inputs-container,
+    .AddInvoice .header-row {
+        display: grid;
+        grid-template-columns: 0.45fr 1fr;
+        gap: 2rem;
+    }
+
+    .AddInvoice .space-filler {
+        display: none;
+    }
+
+    .AddInvoice .single-item {
+        display: grid;
+        grid-template-columns: 0.45fr 1fr;
+        grid-template-rows: 50px;
+        gap: 2rem;
+        border: none;
+    }
+
+    .AddInvoice .second-part {
+        display: grid;
+        grid-template-columns: 0.3fr 0.6fr 0.2fr 1fr;
+        gap: 1rem;
+        align-items: center;
+    }
+
+    .AddInvoice .single-item input {
+        border: 1px solid var(--light-blue);
+        padding-left: 2rem;
+        font-weight: 700;
+        text-transform: capitalize;
+        align-self: stretch;
+    }
+
+    .AddInvoice .single-item .total {
+        border: none;
+    }
+
+    .AddInvoice .more-headers {
+        color: var(--grayish-lavender);
+    }
+
+    .AddInvoice .trash-icon {
+        color: var(--grayish-blue)
+    }
+
+    .AddInvoice .trash-icon:hover {
+        cursor: pointer;
+    }
+
+
+}

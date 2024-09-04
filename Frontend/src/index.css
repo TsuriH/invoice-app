@@ -1,0 +1,66 @@
+*,
+*::before,
+*:after {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* colors */
+    --purple: #7C5DFA;
+    --light-purple: #9277FF;
+    --Dark-navy-blue: #1E2139;
+    --dark-grayish-blue: #252945;
+    --light-blue: #DFE3FA;
+    --grayish-lavender: #888EB0;
+    --grayish-blue: #7E88C3;
+    --black: #0C0E16;
+    --salmon-pink: #EC5757;
+    --bright-lavender-purple: #9277FF;
+    --very-light-grey: #F8F8FB;
+    --dark-blue-black-color: #141625;
+
+    /* fonts */
+    --font-primary: 'League Spartan', sans-serif;
+    --font-weight-bold: bold;
+    --spacing-normal: 0;
+    --spacing-small: -0.25px;
+    --spacing-smaller: -0.5px;
+    --spacing-smallest: -0.75px;
+    --spacing-negative: -1px;
+
+    --font-size-large: 3.6rem;
+    /* 36px */
+    --line-height-large: 3.3rem;
+    /* 33px */
+
+    --font-size-medium: 2.4rem;
+    /* 24px */
+    --line-height-medium: 2.2rem;
+    /* 22px */
+
+    --font-size-small: 1.5rem;
+    /* 15px */
+    --line-height-small: 2.4rem;
+    /* 24px */
+
+    --body-font-size: 1.3rem;
+    /* 13px */
+    --body-line-height: 1.8rem;
+    /* 18px */
+
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-family: var(--font-primary);
+    font-size: var(--body-font-size);    
+}
+
+#root {
+    height: 100vh;
+}

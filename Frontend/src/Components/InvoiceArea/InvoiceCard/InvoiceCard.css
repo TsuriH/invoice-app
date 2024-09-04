@@ -1,0 +1,128 @@
+.InvoiceCard {
+    background: white;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 30px);
+    align-items: center;
+    gap: 0.5rem;
+    padding: 2rem;
+    border-radius: 1rem;
+    border: 2px solid transparent;
+    text-decoration: none;
+
+}
+
+.InvoiceCard:hover {
+    cursor: pointer;
+    border: 2px solid var(--purple)
+}
+
+.InvoiceCard .invoice-card-id span,
+.InvoiceCard .date-created,
+.InvoiceCard .customer-name {
+    color: var(--grayish-lavender);
+}
+
+.InvoiceCard .invoice-card-id {
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.InvoiceCard .date-created {
+    grid-column: 1/1;
+    grid-row: 2/3;
+    align-self: flex-end;
+}
+
+.InvoiceCard .invoice-card-price {
+   
+    align-self: flex-start;
+    margin-top: 0.5rem;
+}
+
+.InvoiceCard .status {
+    grid-column: 2/3;
+    grid-row: 2/4;
+    justify-self: flex-end
+}
+
+.InvoiceCard .customer-name {
+    justify-self: flex-end
+}
+
+.InvoiceCard .invoice-card-price {
+    font-weight: bold;
+    flex-basis: 90px;
+    text-align: start;
+    
+}
+
+.InvoiceCard .right-chevron {
+    display: none;
+}
+
+.InvoiceCard .invoice-basic-info {
+    display: flex;
+    justify-content: space-between;
+}
+
+.InvoiceCard .payment-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.InvoiceCard .status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    width: 110px;
+    height: 45px;
+    gap: 1rem;
+    background-color: #bae4d7;
+    color: #33D69F;
+    font-weight: bold;
+}
+
+.InvoiceCard .status {
+    text-transform: capitalize;
+    flex-basis: 150px;
+}
+
+.InvoiceCard .invoice-card-id, .invoice-card-price{
+    color: var(--black)
+}
+
+
+
+@media (min-width: 577px) {
+
+    .InvoiceCard {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: var(--font-size-small)
+    }
+
+    .InvoiceCard .right-chevron {
+        display: block;
+    }
+
+    .InvoiceCard .status {
+        width: fit-content;
+        
+    }
+
+    .InvoiceCard .invoice-card-price {
+        align-self: center;
+        margin-top: 0rem;
+        
+    }
+
+    .InvoiceCard .date-created {
+        align-self: center;
+    }
+
+
+}

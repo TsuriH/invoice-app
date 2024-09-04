@@ -1,0 +1,421 @@
+.InvoiceDetails {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    background-color: var(--very-light-grey);
+}
+
+.InvoiceDetails .back-btn {
+    align-self: flex-start;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    background: none;
+    border: none;
+    font-weight: 900;
+    margin-bottom: 2rem;
+}
+
+.InvoiceDetails .mobile-status-box,
+.InvoiceDetails .back-btn {
+    margin: 1rem 2rem;
+
+}
+
+.InvoiceDetails .status-box {
+    display: none;
+}
+
+.InvoiceDetails .mobile-status-box,
+.InvoiceDetails .mobile-invoice-actions,
+.InvoiceDetails .invoice-information {
+    background-color: white;
+    border-radius: 5px;
+    padding: 3rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.InvoiceDetails .status-container,
+.InvoiceDetails .invoice-actions,
+.InvoiceDetails .mobile-invoice-actions,
+.InvoiceDetails .status-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.InvoiceDetails .status-container {
+    width: 100%;
+    justify-content: space-between;
+}
+
+.InvoiceDetails .status-headline {
+    color: var(--grayish-blue)
+}
+
+.InvoiceDetails .status-wrapper {
+    background-color: hsl(36, 100%, 97%);
+    padding: 1rem 2rem;
+    display: flex;
+    gap: 1rem;
+    border-radius: 5px;
+}
+
+.InvoiceDetails .status-wrapper>* {
+    color: #FF8F00;
+}
+
+.InvoiceDetails .invoice-actions>* {
+    background: none;
+    border: none;
+    padding: 1rem;
+    border-radius: 5px;
+    font-weight: 900;
+}
+
+.InvoiceDetails .mobile-invoice-actions {
+    background-color: white;
+}
+
+.InvoiceDetails .mobile-invoice-actions>* {
+    background: none;
+    border: none;
+    padding: 1.5rem 2.5rem;
+    border-radius: 35px;
+    font-weight: 900;
+}
+
+
+.InvoiceDetails .invoice-actions {
+    display: none;
+}
+
+.InvoiceDetails .edit-btn,
+.InvoiceDetails .mobile-edit-btn {
+    color: var(--grayish-blue);
+    background-color: var(--light-blue);
+}
+
+.InvoiceDetails .delete-btn,
+.InvoiceDetails .mobile-delete-btn {
+    color: white;
+    background-color: var(--salmon-pink);
+}
+
+
+.InvoiceDetails .change-status-btn,
+.InvoiceDetails .mobile-change-status-btn {
+    background-color: var(--purple);
+    color: white;
+}
+
+.InvoiceDetails .invoice-information {
+    margin: 0rem 2rem;
+}
+
+.InvoiceDetails .address>*,
+.InvoiceDetails .bill-to,
+.InvoiceDetails .invoice-id span,
+.invoice-date p:first-child,
+.payment-due p:first-child,
+.email p:first-child,
+.InvoiceDetails .calculation {
+    color: var(--grayish-blue)
+}
+
+.InvoiceDetails .invoice-information {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5rem;
+
+}
+
+.InvoiceDetails .invoice-details-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.InvoiceDetails .upper-part-headline {
+    margin-bottom: 4rem;
+}
+
+.InvoiceDetails .additional-details {
+    display: flex;
+
+}
+
+.InvoiceDetails .address .name {
+    color: black;
+}
+
+.InvoiceDetails .additional-details {
+    display: flex;
+    gap: 6rem;
+}
+
+.InvoiceDetails .basic-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.InvoiceDetails .name,
+.InvoiceDetails .invoice-date p:last-child,
+.InvoiceDetails .payment-due p:last-child,
+.InvoiceDetails .email p:last-child,
+.service-name,
+.service-cost {
+    font-weight: 700;
+    color: black;
+}
+
+.InvoiceDetails .invoice-date,
+.InvoiceDetails .bill-to,
+.InvoiceDetails .payment-due,
+.email {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.InvoiceDetails .lower-part {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.InvoiceDetails .detailed-payment {
+    display: flex;
+    flex-direction: column;
+    background: var(--very-light-grey);
+    border-radius: 5px;
+    align-self: center;
+    padding: 1rem 0rem 0rem 0rem;
+    width: 100%;
+}
+
+.InvoiceDetails .detailed-payment>* {
+    display: flex;
+}
+
+.InvoiceDetails .service,
+.grand-total {
+    display: flex;
+    gap: 5rem;
+    padding: 1rem 2rem;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.InvoiceDetails .calculation {
+    display: flex;
+    gap: 0.5rem
+}
+
+.InvoiceDetails .grand-total {
+    background-color: var(--dark-grayish-blue);
+    padding: 2rem;
+    color: white;
+    font-weight: 500;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+
+}
+
+.InvoiceDetails .grand-total p:last-child {
+    font-size: var(--font-size-medium);
+}
+
+.InvoiceDetails .left-side {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.InvoiceDetails .headline-table {
+    display: none;
+}
+
+.InvoiceDetails .delete-alert {
+    background-color: rgba(47, 47, 51, 0.9);
+    position: absolute;
+    top: 0px;
+    height: 142%;
+    /* problem why cant I let background to cover all the screen it doesn twork whend I do 100vh or 100% */
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    display: none;
+}
+
+.InvoiceDetails .delete-alert-container {
+
+    background: white;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 0 2rem;
+    border-radius: 8px;
+}
+
+.InvoiceDetails .delete-alert-text {
+    color: var(--grayish-lavender)
+}
+
+.InvoiceDetails .delete-btn-container {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+}
+
+.InvoiceDetails .delete-btn-container>* {
+    border: none;
+    background: red;
+    padding: 1rem 2rem;
+    border-radius: 35px;
+    font-weight: 600;
+}
+
+.InvoiceDetails .delete-btn-container button:first-child {
+    color: var(--grayish-blue);
+    background: var(--very-light-grey);
+}
+
+.InvoiceDetails .delete-btn-container button:last-child {
+    color: white;
+    background: var(--salmon-pink);
+}
+
+.InvoiceDetails .delete-btn-container p {
+    color: white;
+    background: var(--salmon-pink);
+}
+
+
+
+
+
+@media (min-width: 500px) {
+
+    .InvoiceDetails .invoice-details-container {
+        width: 100%;
+    }
+
+    .InvoiceDetails .status-box {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .InvoiceDetails .status-headline {
+        margin-right: 20px;
+    }
+
+    .InvoiceDetails .upper-part {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .InvoiceDetails .upper-part-headline {
+        margin-bottom: 0rem;
+    }
+
+    .InvoiceDetails .lower-part {
+        flex-direction: row;
+        gap: 12rem;
+    }
+
+    .InvoiceDetails .additional-details {
+        display: flex;
+        gap: 12rem;
+    }
+
+    .InvoiceDetails .headline-table {
+        display: flex;
+        /* border: 2px solid red; */
+        justify-content: space-between;
+        padding: 2rem;
+        color: var(--grayish-blue)
+    }
+
+    .InvoiceDetails .right-table {
+        display: flex;
+        gap: 10rem;
+    }
+
+    .InvoiceDetails .left-side {
+        flex-direction: row;
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .InvoiceDetails .times {
+        display: none;
+    }
+
+    .InvoiceDetails .calculation {
+        gap: 10rem;
+        width: 34%;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+
+    .InvoiceDetails .amount,
+    .InvoiceDetails .service-cost {
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    .InvoiceDetails .mobile-invoice-actions,
+    .InvoiceDetails .mobile-status-box {
+        display: none;
+    }
+
+
+    .InvoiceDetails .invoice-actions {
+        display: block;
+    }
+
+    .InvoiceDetails .status-container {
+        justify-content: flex-start;
+    }
+
+    .InvoiceDetails .desktop-invoice-actions {
+        display: flex;
+        justify-content: space-between;
+        padding: 2rem;
+        background-color: white;
+        border-radius: 5px;
+
+    }
+
+    .InvoiceDetails .invoice-actions {
+        display: flex;
+    }
+
+    .InvoiceDetails .invoice-actions>* {
+        border-radius: 35px;
+        padding: 1.5rem 2rem;
+    }
+
+    .InvoiceDetails {
+        flex-direction: column-reverse;
+    }
+
+    .InvoiceDetails .invoice-information {
+        margin: 0rem 0rem;
+    }
+
+    .InvoiceDetails .back-btn {
+        order: 1;
+    }
+
+
+}

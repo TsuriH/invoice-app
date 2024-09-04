@@ -1,0 +1,34 @@
+.Layout {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--very-light-grey);
+
+}
+
+.Layout main {
+    flex: 1;
+    height: 100%
+}
+
+.Layout .spacer {
+    display: none;
+}
+
+
+@media (min-width: 1024px) {
+    .Layout {
+        flex-direction: row;
+    }
+
+    .Layout .spacer {
+        display: block;
+        visibility: hidden;
+    }
+
+    .Layout main {
+        padding: 2% 15%;
+
+    }
+
+
+}

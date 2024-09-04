@@ -1,0 +1,19 @@
+
+.Main .invoices-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 2rem;
+
+}
+
+
+
+/* Responsive */
+@media (min-width: 577px) {
+
+
+    .Main .invoices-container {
+        margin-top: 3rem;
+    }
