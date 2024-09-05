@@ -1,6 +1,6 @@
 import "./Header.css"
-import logo from "../../../assets/logo.svg"
-import moon from "../../../assets/icon-moon.svg"
+import logo from "../../../Assets/logo.svg"
+import moon from "../../../Assets/icon-moon.svg"
 import avatar from "../../../Assets/image-avatar.jpg"
 
 export function Header(): JSX.Element {

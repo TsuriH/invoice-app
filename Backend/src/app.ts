@@ -1,9 +1,16 @@
-import express from "express"
-
+import express, { NextFunction, Request, Response } from "express"
+import invoicesController from "./6-controller.ts/invoice-controller"
+import cors from "cors"
 
 const server = express()
 
-server.get("")
+server.use(cors({
+    origin: '*'
+}))
 
-server.listen(3002, () => console.log("I'm the server and I'm working"))
+server.use("/", invoicesController)
+
+server.use(express.json())
+
+server.listen(3006, () => console.log("I'm the server and I'm working"))
 

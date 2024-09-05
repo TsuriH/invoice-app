@@ -13,3 +13,15 @@ async function getJsonData(): Promise<InvoiceModel[]> {
 
 }
 
+
+async function saveDataToJson(data: InvoiceModel[]): Promise<void> {
+
+    const content = JSON.stringify(data)
+
+    await fsPromises.writeFile(fileName, content)
+}
+
+export default {
+    getJsonData,
+    saveDataToJson
+}

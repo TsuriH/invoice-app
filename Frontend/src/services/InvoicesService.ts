@@ -12,6 +12,14 @@ class InvoicesService {
 
     }
 
+    public async addInvoice(invoice: InvoiceModel): Promise<InvoiceModel> {
+
+        const response = await axios.post<InvoiceModel>(appConfig.invoicesUrl)
+        const invoices = response.data
+        return invoices;
+
+    }
+
 }
 
 const dataService = new InvoicesService()

@@ -25,8 +25,32 @@ class InvoiceModel {
         price: number;
         // total: number;
     }[];
-    
+
     total: string;
+
+    public constructor(invoice: InvoiceModel) {
+        this.clientAddress = invoice.clientAddress
+        this.clientEmail = invoice.clientEmail
+        this.clientName = invoice.clientName
+        this.createdAt = invoice.createdAt
+        this.description = invoice.description
+        this.id = invoice.id
+        this.items = invoice.items.map((item: any) => ({
+            name: item.name,
+            quantity: item.quantity,
+            price: item.price,
+            total: item.total
+        }))
+        this.paymentDue = invoice.paymentDue
+        this.senderAddress = {
+            street: invoice.senderAddress.street,
+            city: invoice.senderAddress.city,
+            postCode: invoice.senderAddress.postCode,
+            country: invoice.senderAddress.country
+        }; 
+        this.status = invoice.status
+        this.total = invoice.total
+    }
 }
 
 export default InvoiceModel;

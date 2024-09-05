@@ -73,6 +73,8 @@ export function AddInvoice(): JSX.Element {
 
     const onSubmit = (data: InvoiceModel) => {
         console.log(data)
+        console.log(validatedInvoiceId())
+        // function that use service to get to the file that located at the backend and update it
 
     }
 
