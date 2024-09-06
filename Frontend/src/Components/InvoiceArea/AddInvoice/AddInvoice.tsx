@@ -29,7 +29,6 @@ export function AddInvoice(): JSX.Element {
 
     useEffect(() => {
 
-        console.log(items, "items")
         const newTotals = items.map(item => item.quantity * item.price);
         setTotals(newTotals);
     }, [items, valueChanged]);
@@ -71,9 +70,15 @@ export function AddInvoice(): JSX.Element {
         return newId;
     }
 
-    const onSubmit = (data: InvoiceModel) => {
-        console.log(data)
-        console.log(validatedInvoiceId())
+    const onSubmit = async (newInvoiceData: InvoiceModel) => {
+        try {
+            newInvoiceData.id = validatedInvoiceId()
+            await dataService.addInvoice(newInvoiceData)
+
+        } catch (error: any) {
+            alert(error.message);
+        }
+
         // function that use service to get to the file that located at the backend and update it
 
     }

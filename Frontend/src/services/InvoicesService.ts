@@ -12,11 +12,9 @@ class InvoicesService {
 
     }
 
-    public async addInvoice(invoice: InvoiceModel): Promise<InvoiceModel> {
-
-        const response = await axios.post<InvoiceModel>(appConfig.invoicesUrl)
-        const invoices = response.data
-        return invoices;
+    public async addInvoice(invoice: InvoiceModel): Promise<void> {
+        console.log(`${appConfig.invoicesUrl}add-invoice`)
+        await axios.post<InvoiceModel>(`${appConfig.invoicesUrl}add-invoice`, invoice)
 
     }
 
