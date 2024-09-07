@@ -4,13 +4,14 @@ import cors from "cors"
 
 const server = express()
 
+server.use(express.json())
+
 server.use(cors({
     origin: '*'
 }))
 
 server.use("/", invoicesController)
 
-server.use(express.json())
 
 server.listen(3006, () => console.log("I'm the server and I'm working"))
 

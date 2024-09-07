@@ -29,7 +29,12 @@ class InvoiceModel {
     total: string;
 
     public constructor(invoice: InvoiceModel) {
-        this.clientAddress = invoice.clientAddress
+        this.clientAddress = {
+            street: invoice.clientAddress.street,
+            city: invoice.clientAddress.city,
+            postCode: invoice.clientAddress.postCode,
+            country: invoice.clientAddress.country
+        };
         this.clientEmail = invoice.clientEmail
         this.clientName = invoice.clientName
         this.createdAt = invoice.createdAt
@@ -47,7 +52,7 @@ class InvoiceModel {
             city: invoice.senderAddress.city,
             postCode: invoice.senderAddress.postCode,
             country: invoice.senderAddress.country
-        }; 
+        };
         this.status = invoice.status
         this.total = invoice.total
     }

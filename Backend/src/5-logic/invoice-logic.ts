@@ -6,10 +6,11 @@ async function getAllData(): Promise<InvoiceModel[]> {
     return data
 }
 
-async function addInvoice(invoice: InvoiceModel): Promise<InvoiceModel> {
-    const invoices = await dal.getJsonData();
-    invoices.push(invoice)
-    await dal.saveDataToJson(invoices)
+async function addInvoice(invoice: InvoiceModel): Promise<void> {
+    const currentInvoice = await dal.getJsonData();
+    currentInvoice.push(invoice)
+    await dal.saveDataToJson(currentInvoice)
+
 }
 
 export default {
