@@ -13,9 +13,18 @@ class InvoicesService {
     }
 
     public async addInvoice(invoice: InvoiceModel): Promise<void> {
-        console.log(`${appConfig.invoicesUrl}add-invoice`)
         await axios.post<InvoiceModel>(`${appConfig.invoicesUrl}add-invoice`, invoice)
+    }
 
+    public async deleteInvoice(id: string): Promise<void> {
+        
+        await axios.delete(`${appConfig.invoicesUrl}delete-invoice/${id}`)
+    }
+
+
+    public async markAsPaid(id: string): Promise<void> {
+        
+        await axios.put(`${appConfig.invoicesUrl}update-invoice/${id}`)
     }
 
 }

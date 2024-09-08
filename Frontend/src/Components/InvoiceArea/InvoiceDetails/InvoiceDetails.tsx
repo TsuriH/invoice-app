@@ -3,15 +3,33 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCircle } from "@fortawesome/free-solid-svg-icons"
 import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
-import dataService from "../../../services/InvoicesService"
 import InvoiceModel from "../../../model/InvoiceModel"
+import dataService from "../../../services/InvoicesService"
+import { useNavigate } from 'react-router-dom';
 
 export function InvoiceDetails(): JSX.Element {
+
     const [invoicesDataArray, setInvoicesDataArray] = useState<InvoiceModel[]>([]);
+
+    const [currentInvoice, setCurrentInvoice] = useState<InvoiceModel>();
 
     const { invoiceId } = useParams<{ invoiceId?: string }>();
 
-    const currentInvoice = invoicesDataArray.find(invoice => invoice.id === Number(invoiceId));
+    const navigate = useNavigate();
+
+
+    useEffect(() => {
+        dataService.getAllData()
+            .then(data => {
+                setInvoicesDataArray(data)
+                setCurrentInvoice(data.find(invoice => invoice.id === invoiceId))
+                const currentInvoice = data.find(invoice => invoice.id === invoiceId)
+                setCurrentInvoice(currentInvoice)
+
+            })
+            .catch(err => console.log(err))
+
+    }, [])
 
     function formatDate(dateString: string) {
         const date = new Date(dateString);
@@ -20,6 +38,33 @@ export function InvoiceDetails(): JSX.Element {
             month: 'short',
             year: 'numeric',
         });
+    }
+
+    const deleteInvoice = async (id: string) => {
+        //go to the server and delete this invoice        
+        await dataService.deleteInvoice(id)
+        // fetch back 
+        const updatedInvoices = await dataService.getAllData();
+        //update the data of invoiceDataArray
+        setInvoicesDataArray(updatedInvoices);
+        //back to the main menu
+        navigate('/');
+
+    }
+
+    const changeToPaid = async (id: string) => {
+        if (currentInvoice?.status === "paid") {
+            alert("The invoice is already marked as paid")
+            return
+        } else {
+
+            //function that use the id to change to paid if it's already paid alert it's already payed
+
+            //bring the updated list
+
+        }
+
+
     }
 
     const formatNumber = (num: number) => {
@@ -144,14 +189,14 @@ export function InvoiceDetails(): JSX.Element {
                 </div>
                 <div className="invoice-actions">
                     <button className="edit-btn">Edit</button>
-                    <button className="delete-btn">Delete</button>
+                    <button className="delete-btn" onClick={() => deleteInvoice(currentInvoice.id)}>Delete</button>
                     <button className="change-status-btn">Mark as Paid</button>
                 </div>
             </div>
             <div className="mobile-invoice-actions">
                 <button className="mobile-edit-btn">Edit</button>
-                <button className="mobile-delete-btn">Delete</button>
-                <button className="mobile-change-status-btn">Mark as Paid</button>
+                <button className="mobile-delete-btn" onClick={() => deleteInvoice(currentInvoice.id)}>Delete</button>
+                <button className="mobile-change-status-btn" onClick={() => changeToPaid(currentInvoice.id)}>Mark as Paid</button>
             </div>
         </div>
     );

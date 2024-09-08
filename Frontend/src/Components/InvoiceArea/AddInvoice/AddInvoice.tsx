@@ -55,7 +55,7 @@ export function AddInvoice(): JSX.Element {
         }
 
         const newId = newIdRaw.toString();
-        return newId;
+        return newId.replace(/,/g, "");
     }
 
     // Recursively call the function if a duplicate is found

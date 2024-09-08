@@ -1,5 +1,5 @@
 class InvoiceModel {
-    id: number;
+    id: string;
     createdAt: string;
     paymentDue: string;
     description: string;

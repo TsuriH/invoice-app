@@ -297,6 +297,9 @@
     background: var(--salmon-pink);
 }
 
+.InvoiceDetails .mobile-delete-btn, .delete-btn:hover {
+    cursor: pointer;
+}
 
 
 
