@@ -1,7 +1,7 @@
 import "./InvoiceDetails.css"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCircle } from "@fortawesome/free-solid-svg-icons"
-import { useParams } from "react-router-dom"
+import { NavLink, useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 import InvoiceModel from "../../../model/InvoiceModel"
 import dataService from "../../../services/InvoicesService"
@@ -20,16 +20,22 @@ export function InvoiceDetails(): JSX.Element {
 
     useEffect(() => {
         dataService.getAllData()
+
             .then(data => {
+
                 setInvoicesDataArray(data)
+
                 setCurrentInvoice(data.find(invoice => invoice.id === invoiceId))
+
                 const currentInvoice = data.find(invoice => invoice.id === invoiceId)
+
                 setCurrentInvoice(currentInvoice)
 
             })
+
             .catch(err => console.log(err))
 
-    }, [])
+    }, [invoicesDataArray])
 
     function formatDate(dateString: string) {
         const date = new Date(dateString);
@@ -54,14 +60,18 @@ export function InvoiceDetails(): JSX.Element {
 
     const changeToPaid = async (id: string) => {
         if (currentInvoice?.status === "paid") {
+
             alert("The invoice is already marked as paid")
+            
             return
+
         } else {
 
-            //function that use the id to change to paid if it's already paid alert it's already payed
+            await dataService.markAsPaid(id)
 
-            //bring the updated list
+            const updatedInvoicesList = await dataService.getAllData()
 
+            setInvoicesDataArray(updatedInvoicesList)
         }
 
 
@@ -188,9 +198,9 @@ export function InvoiceDetails(): JSX.Element {
                     </div>
                 </div>
                 <div className="invoice-actions">
-                    <button className="edit-btn">Edit</button>
+                    <NavLink to={`/edit-invoice/${currentInvoice.id}`} className="edit-btn" >Edit</NavLink>
                     <button className="delete-btn" onClick={() => deleteInvoice(currentInvoice.id)}>Delete</button>
-                    <button className="change-status-btn">Mark as Paid</button>
+                    <button className="change-status-btn" onClick={() => changeToPaid(currentInvoice.id)}>Mark as Paid</button>
                 </div>
             </div>
             <div className="mobile-invoice-actions">

@@ -21,7 +21,7 @@ export function Routing(props: RoutingProps): JSX.Element {
                 <Route path="/no-invoices" element={<EmptyInvoicesList />} />
                 <Route path="/invoice-details/:invoiceId" element={<InvoiceDetails />} />
                 <Route path="/add-invoice" element={<AddInvoice />} />
-                <Route path="/edit-invoice" element={<EditInvoice />} />
+                <Route path="/edit-invoice/:invoiceId" element={<EditInvoice />} />
 
             </Routes>
 

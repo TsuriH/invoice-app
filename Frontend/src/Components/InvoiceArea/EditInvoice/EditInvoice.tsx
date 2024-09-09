@@ -1,8 +1,21 @@
 import "./EditInvoice.css"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faTrash } from "@fortawesome/free-solid-svg-icons"
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import dataService from "../../../services/InvoicesService";
 
 export function EditInvoice(): JSX.Element {
+
+    const { invoiceId } = useParams<{ invoiceId?: string }>();
+
+    const [invoiceToUpdate, setInvoiceToUpdate] =useState()
+
+    useEffect(()=>{
+
+        const currentInvoice = dataService.getSingleInvoice(invoiceId)
+        
+    },[])
 
     return (
         <div className="EditInvoice">

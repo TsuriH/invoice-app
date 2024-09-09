@@ -96,6 +96,8 @@
 .InvoiceDetails .mobile-edit-btn {
     color: var(--grayish-blue);
     background-color: var(--light-blue);
+    text-decoration: none;
+    
 }
 
 .InvoiceDetails .delete-btn,
@@ -297,11 +299,18 @@
     background: var(--salmon-pink);
 }
 
-.InvoiceDetails .mobile-delete-btn, .delete-btn:hover {
+.InvoiceDetails .mobile-delete-btn,
+.delete-btn:hover {
     cursor: pointer;
 }
 
+.InvoiceDetails .change-status-btn:hover {
+    cursor: pointer;
+}
 
+.InvoiceDetails .mobile-change-status-btn {
+    cursor: pointer;
+}
 
 
 @media (min-width: 500px) {
