@@ -22,4 +22,42 @@ router.post("/api/invoices/add-invoice", async (request: Request, response: Resp
     }
 })
 
+router.delete("/api/invoices/delete-invoice/:invoiceId", async (request: Request, response: Response, next: NextFunction) => {
+    const invoiceId = request.params.invoiceId
+
+    const deletedInvoice = await invoiceLogic.deleteInvoiceId(invoiceId)
+
+    if (!deletedInvoice) {
+
+        return response.status(404).json({ message: 'Invoice not found' });
+
+    }
+
+    return response.status(200).json({ message: 'Invoice deleted successfully', deletedInvoice });
+
+})
+
+router.put("/api/invoices/update-invoice/:invoiceId", async (request: Request, response: Response, next: NextFunction) => {
+
+    try {
+
+        const invoiceId = request.params.invoiceId
+
+        const updatedInvoice = await invoiceLogic.updateInvoice(invoiceId)
+
+        return response.status(200).json({
+            message: 'Invoice updated successfully',
+            updatedInvoice
+        });
+
+    } catch (error) {
+
+        return response.status(400).json({ message: error.message });
+
+    }
+
+
+
+
+})
 export default router
