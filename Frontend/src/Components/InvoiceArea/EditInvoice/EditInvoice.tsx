@@ -4,183 +4,268 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons"
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import dataService from "../../../services/InvoicesService";
+import InvoiceModel from "../../../model/InvoiceModel";
+import { Controller, useFieldArray, useForm } from "react-hook-form";
 
 export function EditInvoice(): JSX.Element {
 
+    const [invoiceToUpdate, setInvoiceToUpdate] = useState<InvoiceModel>()
+
+    const [totals, setTotals] = useState<number[]>([0]);
+
+    const [valueChanged, setValueChanged] = useState(false)
+
     const { invoiceId } = useParams<{ invoiceId?: string }>();
 
-    const [invoiceToUpdate, setInvoiceToUpdate] =useState()
+    useEffect(() => {
 
-    useEffect(()=>{
+        if (invoiceId) {
 
-        const currentInvoice = dataService.getSingleInvoice(invoiceId)
-        
-    },[])
+            dataService.getSingleInvoice(invoiceId)
+                .then(data => setInvoiceToUpdate(data))
+                .catch(err => console.log(err))
+        }
+
+    }, [])
+    
+    const {
+        register,
+        handleSubmit,
+        control,
+        formState: { errors },
+        watch
+    } = useForm<InvoiceModel>({ defaultValues: { items: [{ name: '', quantity: 1, price: 0 }] } })
+
+    const { fields, append, remove } = useFieldArray({ control, name: "items" });
+
+    const items = watch("items");
+
+    useEffect(() => {
+
+        const newTotals = items.map(item => item.quantity * item.price);
+        setTotals(newTotals);
+    }, [items, valueChanged]);
+
+    const onSubmit = async (newInvoiceData: InvoiceModel) => {
+        try {
+
+            await dataService.addInvoice(newInvoiceData)
+
+        } catch (error: any) {
+            alert(error.message);
+        }
+
+    }
 
     return (
-        <div className="EditInvoice">
+        <div className="AddInvoice">
 
-            <div className="edit-invoice-head">
-                <p>Edit</p>
-                <div className="invoice-id"><span>#</span>XM9141</div>
+            <div className="new-invoice-head">
+                <p>New Invoice</p>
             </div>
 
-            <div className="bill-from-container">
-                <p className="bill-from headline">Bill From</p>
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <div className="bill-from-container">
+                    <p className="bill-from headline">Bill From</p>
 
-                <label htmlFor="" className="street">Street Address
-                    <input type="text" />
-                </label>
-
-                <div className="detailed-address">
-
-                    <div className="city-and-post-container">
-
-                        <label htmlFor="" className="city">City
-                            <input type="text" />
-                        </label>
-
-                        <label htmlFor="" className="post-code">Post Code
-                            <input type="text" />
-                        </label>
-
-                    </div>
-
-                    <label htmlFor="" className="country">Country
-                        <input type="text" />
+                    <label htmlFor="" className="street">Street Address
+                        <input {...register("senderAddress.street", { required: "This filed is required" })} />
+                        <p>{errors.senderAddress?.street?.message}</p>
                     </label>
 
-                </div>
+                    <div className="detailed-address">
 
-            </div>
+                        <div className="city-and-post-container">
 
-            <div className="bill-to-container">
+                            <label htmlFor="" className="city">City
+                                <input type="text" {...register("senderAddress.city", { required: "This filed is required" })} />
+                                <p>{errors.senderAddress?.city?.message}</p>
+                            </label>
 
-                <p className="bill-to headline">Bill To</p>
-
-                <label htmlFor="" className="client-name">Client's Name
-                    <input type="text" />
-                </label>
-
-                <label htmlFor="" className="client-email">Client's Email
-                    <input type="text" />
-                </label>
-
-                <label htmlFor="" className="street-address">Street Address
-                    <input type="text" />
-                </label>
-
-                <div className="city-country-container">
-
-                    <div className="city-and-post-container">
-
-                        <label htmlFor="" className="city">City
-                            <input type="text" />
-                        </label>
-
-                        <label htmlFor="" className="post-code">Post Code
-                            <input type="text" />
-                        </label>
-
-                    </div>
-
-                    <label htmlFor="" className="country">Country
-                        <input type="text" />
-                    </label>
-
-                </div>
-
-                <div className="last-details">
-
-                    <div className="invoice-date-container">
-
-                        <label htmlFor="" className="invoice-date">Invoice Date
-                            <input type="date" />
-                        </label>
-
-                        <label htmlFor="" className="payment-terms">Payment Terms
-                            <select name="" id="">
-                                <option value="">Net 30 Days</option>
-                                <option value="">Net 60 Days</option>
-                                <option value="">Net 90 Days</option>
-                            </select>
-                        </label>
-
-
-                    </div>
-
-                    <label htmlFor="" className="project-name">Project Description
-                        <input type="text" />
-                    </label>
-
-                </div>
-
-
-            </div>
-            <h3 className="item-header">Item List</h3>
-
-
-            <div className="items-container">
-
-                <div className="item-row">
-
-                    <div className="header-row">
-                        <p className="mobile-single-row" >Item Name</p>
-                        <div className="more-headers">
-                            <p>Qty.</p>
-                            <p>Price</p>
-                            <p>Total</p>
-                            <FontAwesomeIcon icon={faTrash} className="space-filler" />
-                        </div>
-
-                    </div>
-
-                    <div className="inputs-container">
-
-                        <div className="item-name-input-container item-container">
-
-                            <p className="mobile-header-input">Item Name</p>
-                            <input type="text" className="mobile-single-row" />
+                            <label htmlFor="" className="post-code">Post Code
+                                <input type="text" {...register("senderAddress.postCode", { required: "This filed is required" })} />
+                                <p>{errors.senderAddress?.postCode?.message}</p>
+                            </label>
 
                         </div>
 
-                        <div className="lower-item-info">
+                        <label htmlFor="" className="country">Country
 
-                            <div className="quantity-input-container item-container" >
-                                <p className="mobile-header-input">Qty.</p>
-                                <input type="number" className="mobile-single-row" />
-                            </div>
+                            <input {...register("senderAddress.country", { required: "This filed is required" })} />
+                            <p>{errors.senderAddress?.country?.message}</p>
+                        </label>
 
-                            <div className="Price-input-container item-container">
-                                <p className="mobile-header-input">Price</p>
-                                <input type="number" className="mobile-single-row" />
-                            </div>
+                    </div>
 
-                            <div className="Price-input-container item-container">
-                                <p className="mobile-header-input">Total</p>
-                                <p className="item-total" style={{ color: "var(--grayish-lavender)", fontWeight: "700", fontSize: "1.5rem" }}>156.00</p>
-                            </div>
+                </div>
 
-                            <div className="item-bin-container item-container">
-                                <p className="space-filler ">fill</p>
-                                <FontAwesomeIcon icon={faTrash} style={{ color: "var(--grayish-lavender)", fontSize: "1.8rem" }} />
+                <div className="bill-to-container">
+
+                    <p className="bill-to headline">Bill To</p>
+
+                    <label htmlFor="" className="client-name">Client's Name
+                        <input {...register("clientName", { required: "This filed is required" })} />
+                        <p>{errors.clientName?.message}</p>
+
+                    </label>
+
+                    <label htmlFor="" className="client-email">Client's Email
+                        <input {...register("clientEmail", { required: "This filed is required" })} />
+                        <p>{errors.clientEmail?.message}</p>
+
+                    </label>
+
+                    <label htmlFor="" className="street-address">Street Address
+                        <input {...register("clientAddress.street", { required: "This filed is required" })} />
+                        <p>{errors.senderAddress?.street?.message}</p>
+                    </label>
+
+                    <div className="city-country-container">
+
+                        <div className="city-and-post-container">
+
+                            <label htmlFor="" className="city">City
+                                <input {...register("clientAddress.city", { required: "This filed is required" })} />
+                                <p>{errors.clientAddress?.city?.message}</p>
+
+                            </label>
+
+                            <label htmlFor="" className="post-code">Post Code
+                                <input {...register("clientAddress.postCode", { required: "This filed is required" })} />
+                                <p>{errors.clientAddress?.postCode?.message}</p>
+
+                            </label>
+
+                        </div>
+
+                        <label htmlFor="" className="country">Country
+                            <input {...register("clientAddress.country", { required: "This filed is required" })} />
+                            <p>{errors.clientAddress?.country?.message}</p>
+
+                        </label>
+
+                    </div>
+
+                    <div className="last-details">
+
+                        <div className="invoice-date-container">
+
+                            <label htmlFor="" className="invoice-date">Invoice Date
+                                <input {...register("createdAt", { required: "This filed is required" })} />
+                                <p>{errors.createdAt?.message}</p>
+
+                            </label>
+
+                            <label htmlFor="" className="payment-terms">Payment Terms
+                                <select name="" id="">
+                                    <option value="">Net 30 Days</option>
+                                    <option value="">Net 60 Days</option>
+                                    <option value="">Net 90 Days</option>
+                                </select>
+                            </label>
+
+
+                        </div>
+
+                        <label htmlFor="" className="project-name">Project Description
+                            <input {...register("description", { required: "This filed is required" })} />
+                            <p>{errors.description?.message}</p>
+
+                        </label>
+
+                    </div>
+
+
+                </div>
+                <h3 className="item-header">Item List</h3>
+
+
+                <div className="items-container">
+
+                    <div className="item-row">
+
+                        <div className="header-row">
+                            <p className="mobile-single-row" >Item Name</p>
+                            <div className="more-headers">
+                                <p>Qty.</p>
+                                <p>Price</p>
+                                <p>Total</p>
+                                <FontAwesomeIcon icon={faTrash} className="space-filler" />
                             </div>
 
                         </div>
 
+                        {fields.map((item, index) => (
+
+                            <div key={item.id} className="single-item">
+
+                                <input
+                                    id="name"
+                                    {...register(`items.${index}.name`, { required: 'Item name is required' })}
+                                />
+                                <div className="second-part">
+
+                                    <Controller
+                                        control={control}
+                                        name={`items.${index}.quantity`}
+                                        rules={{ required: "This field is required" }}
+                                        render={({ field: { onChange, value } }) => (
+                                            <input
+
+                                                type="number"
+                                                value={value}
+                                                onChange={(e) => {
+                                                    setValueChanged(!valueChanged)
+                                                    onChange(e);
+                                                }}
+                                            />
+                                        )}
+                                    />
+
+                                    <Controller
+                                        control={control}
+                                        name={`items.${index}.price`}
+                                        rules={{ required: "This field is required" }}
+                                        render={({ field: { onChange, value } }) => (
+                                            <input
+                                                className="mobile-single-row"
+                                                type="number"
+                                                value={value}
+                                                onChange={(e) => {
+                                                    setValueChanged(!valueChanged)
+                                                    onChange(e);
+
+                                                }}
+                                            />
+                                        )}
+                                    />
+
+                                    <p className="total"> {totals[index] || 0}</p>
+
+                                    <FontAwesomeIcon icon={faTrash} className="trash-icon" onClick={() => remove(index)} />
+
+                                </div>
+
+                            </div>
+                        ))}
+
                     </div>
 
-                    
+                    <button className="add-new-item-btn" onClick={(e) => {
+                        e.preventDefault()
+                        append({ name: '', quantity: 1, price: 0 })
+                    }
+                    } >+ Add New Item</button>
 
                 </div>
 
-                <button className="add-new-item-btn">+ Add New Item</button>
-            </div>
+                <div className="new-buttons-container">
+                    <button className="discard-btn">Discard</button>
+                    <button className="draft-btn">Save as Draft</button>
+                    <input type="submit" className="save-btn" value="Save & Send" />
+                </div>
 
-            <div className="edit-buttons-container">
-                <button className="cancel-btn">Cancel</button>
-                <button className="save-btn">Save Changes</button>
-            </div>
+            </form>
         </div>
     )
 }

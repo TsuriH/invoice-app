@@ -6,15 +6,27 @@ async function getAllData(): Promise<InvoiceModel[]> {
     return data
 }
 
-async function getChosenInvoice(invoiceId: string): Promise<InvoiceModel[]> {
+async function getChosenInvoice(invoiceId: string): Promise<InvoiceModel> {
+
     const data = await dal.getJsonData();
+
     const chosenInvoice = data.find(invoice => invoice.id === invoiceId)
-    return data
+
+    if (!chosenInvoice) {
+
+        throw new Error(`Invoice with ID ${invoiceId} not found`);
+
+    }
+
+    return chosenInvoice
 }
 
 async function addInvoice(invoice: InvoiceModel): Promise<void> {
+
     const currentInvoice = await dal.getJsonData();
+
     currentInvoice.push(invoice)
+
     await dal.saveDataToJson(currentInvoice)
 
 }
@@ -62,5 +74,5 @@ export default {
     getAllData,
     addInvoice,
     deleteInvoiceId,
-    updateInvoice
+    updateInvoice, getChosenInvoice
 }

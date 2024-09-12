@@ -1,0 +1,15 @@
+   const { invoiceId } = useParams<{ invoiceId?: string }>();
+
+    const [invoiceToUpdate, setInvoiceToUpdate] = useState<InvoiceModel>()
+
+    useEffect(() => {
+
+        if (invoiceId) {
+
+            dataService.getSingleInvoice(invoiceId)
+                .then(data => setInvoiceToUpdate(data))
+                .catch(err => console.log(err))
+
+        }
+
+    }, [])

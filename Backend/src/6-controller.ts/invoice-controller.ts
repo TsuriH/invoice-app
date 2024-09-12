@@ -10,6 +10,22 @@ router.get("/api/invoices", async (request: Request, response: Response, next: N
     response.json(data)
 })
 
+router.get("/api/invoices/:invoiceId", async (request: Request, response: Response, next: NextFunction) => {
+    try {
+        const invoiceId = request.params.invoiceId
+
+        const chosenInvoice = await invoiceLogic.getChosenInvoice(invoiceId)
+
+        response.json(chosenInvoice)
+
+    } catch (error) {
+
+        return response.status(404).json({ message: error.message });
+    }
+
+})
+
+
 router.post("/api/invoices/add-invoice", async (request: Request, response: Response, next: NextFunction) => {
     try {
         console.log(request.body)
@@ -46,8 +62,7 @@ router.put("/api/invoices/update-invoice/:invoiceId", async (request: Request, r
         const updatedInvoice = await invoiceLogic.updateInvoice(invoiceId)
 
         return response.status(200).json({
-            message: 'Invoice updated successfully',
-            updatedInvoice
+            message: 'Invoice updated successfully', updatedInvoice
         });
 
     } catch (error) {

@@ -14,8 +14,12 @@ class InvoicesService {
 
     public async getSingleInvoice(id: string): Promise<InvoiceModel> {
 
-        const response = await axios.get<InvoiceModel>(`${appConfig.invoicesUrl}/${id} `)
+        
+        const response = await axios.get<InvoiceModel>(`${appConfig.invoicesUrl}${id}`)
+        console.log(response);
+        
         const invoice = response.data
+
         return invoice;
 
     }
