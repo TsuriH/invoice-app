@@ -3,6 +3,7 @@
     flex-direction: column;
     gap: 2rem;
     background-color: white;
+    
 }
 
 .EditInvoice .edit-invoice-head,
@@ -11,6 +12,7 @@
 h3,
 .items-container {
     padding: 0rem 2rem;
+    margin-top: 2rem;
 }
 
 .EditInvoice .headline {
@@ -29,11 +31,13 @@ h3,
 
 }
 
-.EditInvoice .edit-invoice-head {
+.EditInvoice .new-invoice-head {
     display: flex;
-    font-size: 1.5rem;
+    font-size: 2rem;
     font-weight: 600;
     gap: 0.2rem;
+    padding-left: 2rem;
+
 }
 
 .EditInvoice label {
@@ -69,11 +73,16 @@ select {
     width: 100%;
 }
 
-
 .EditInvoice .item-row {
     display: flex;
     flex-direction: column;
     gap: 2rem;
+}
+
+.EditInvoice .save-btn:hover {
+    cursor: pointer;
+    background:var(--light-blue);
+    color: var(--grayish-lavender)
 }
 
 .EditInvoice .lower-item-info {
@@ -102,6 +111,10 @@ select {
     color: var(--grayish-lavender);
 }
 
+.EditInvoice .inputs-container .bin-btn:hover {
+    cursor: pointer;
+}
+
 .EditInvoice .item-row .item-container>input,
 .item-total {
     padding: 15px;
@@ -120,7 +133,11 @@ select {
 }
 
 .EditInvoice .inputs-container {
-margin-bottom: 1rem;}
+    margin-bottom: 1rem;
+    align-items: flex-end;
+}
+
+
 
 .EditInvoice input[type="number"] {
     -moz-appearance: textfield;
@@ -155,7 +172,11 @@ margin-bottom: 1rem;}
     margin-top: 5rem;
 }
 
-.EditInvoice .edit-buttons-container {
+.EditInvoice .add-new-item-btn:hover {
+    cursor: pointer;
+}
+
+.EditInvoice .new-buttons-container {
     display: flex;
     gap: 1rem;
     margin-top: 6rem;
@@ -163,7 +184,7 @@ margin-bottom: 1rem;}
 
 
 
-.EditInvoice .edit-buttons-container>* {
+.EditInvoice .new-buttons-container>* {
     border: none;
     border-radius: 50px;
     padding: 1.5rem;
@@ -172,8 +193,9 @@ margin-bottom: 1rem;}
 
 }
 
-.EditInvoice .cancel-btn {
-    color: var(--grayish-lavender)
+.EditInvoice .draft-btn {
+    color: var(--grayish-lavender);
+    background: var(--dark-grayish-blue);
 }
 
 .EditInvoice .save-btn {
@@ -181,7 +203,7 @@ margin-bottom: 1rem;}
     color: white;
 }
 
-.EditInvoice .edit-buttons-container {
+.EditInvoice .new-buttons-container {
     display: flex;
     justify-content: flex-end;
     padding: 1rem 0rem;
@@ -190,29 +212,41 @@ margin-bottom: 1rem;}
     padding: 2rem 2rem;
 }
 
+.EditInvoice .discard-btn {
+    color: var(--grayish-blue);
+}
+
+
 .EditInvoice .header-row {
     display: none;
 }
 
-
+.EditInvoice label>p {
+    color: red;
+}
 
 /* RESPONSIVE */
 
 @media (min-width: 700px) {
-    .EditInvoice {}
 
     .EditInvoice .item-row {
         display: flex;
         flex-direction: column;
     }
 
-    .EditInvoice .item-container>p {
+    .EditInvoice .mobile-header-input {
         display: none;
     }
 
+    .EditInvoice .item-total {
+        display: block;
+    }
+
+
+
     .EditInvoice .more-headers {
         display: grid;
-        grid-template-columns: 0.5fr 1fr 1fr 1fr ;
+        grid-template-columns: 0.5fr 1fr 1fr 1fr;
     }
 
     .EditInvoice .items-container {
@@ -236,5 +270,49 @@ margin-bottom: 1rem;}
         grid-template-columns: 0.45fr 1fr;
         gap: 2rem;
     }
+
+    .EditInvoice .space-filler {
+        display: none;
+    }
+
+    .EditInvoice .single-item {
+        display: grid;
+        grid-template-columns: 0.45fr 1fr;
+        grid-template-rows: 50px;
+        gap: 2rem;
+        border: none;
+    }
+
+    .EditInvoice .second-part {
+        display: grid;
+        grid-template-columns: 0.3fr 0.6fr 0.2fr 1fr;
+        gap: 1rem;
+        align-items: center;
+    }
+
+    .EditInvoice .single-item input {
+        border: 1px solid var(--light-blue);
+        padding-left: 2rem;
+        font-weight: 700;
+        text-transform: capitalize;
+        align-self: stretch;
+    }
+
+    .EditInvoice .single-item .total {
+        border: none;
+    }
+
+    .EditInvoice .more-headers {
+        color: var(--grayish-lavender);
+    }
+
+    .EditInvoice .trash-icon {
+        color: var(--grayish-blue)
+    }
+
+    .EditInvoice .trash-icon:hover {
+        cursor: pointer;
+    }
+
 
 }

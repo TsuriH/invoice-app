@@ -1,7 +1,7 @@
 import "./EditInvoice.css"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faTrash } from "@fortawesome/free-solid-svg-icons"
-import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import dataService from "../../../services/InvoicesService";
 import InvoiceModel from "../../../model/InvoiceModel";
@@ -37,7 +37,22 @@ export function EditInvoice(): JSX.Element {
         control,
         formState: { errors },
         watch
-    } = useForm<InvoiceModel>({ defaultValues: { items: [{ name: '', quantity: 1, price: 0 }] } })
+    } = useForm<InvoiceModel>({
+        defaultValues: {
+            id: invoiceToUpdate?.id || "",
+            createdAt: invoiceToUpdate?.createdAt || "",
+            paymentDue: invoiceToUpdate?.paymentDue || "",
+            description: invoiceToUpdate?.description || "",
+            paymentTerms: invoiceToUpdate?.paymentTerms || "",
+            clientName: invoiceToUpdate?.clientName || "",
+            clientEmail: invoiceToUpdate?.clientEmail || "",
+            status: invoiceToUpdate?.status || "",
+            senderAddress: invoiceToUpdate?.senderAddress || { street: "", city: "", postCode: 0, country: "" },
+            clientAddress: invoiceToUpdate?.clientAddress || { street: "", city: "", postCode: 0, country: "" },
+            items: invoiceToUpdate?.items || [{ name: '', quantity: 1, price: 0 }],
+            total: invoiceToUpdate?.total || 0
+        }
+    });
 
     useEffect(() => {
         if (invoiceId) {
@@ -77,7 +92,7 @@ export function EditInvoice(): JSX.Element {
 
 
     return (
-        <div className="AddInvoice">
+        <div className="EditInvoice">
 
             <div className="new-invoice-head">
                 <p>Edit #{invoiceToUpdate?.id}</p>
@@ -88,7 +103,7 @@ export function EditInvoice(): JSX.Element {
                     <p className="bill-from headline">Bill From</p>
 
                     <label htmlFor="" className="street">Street Address
-                        <input {...register("senderAddress.street", { required: "This filed is required" })} value={invoiceToUpdate?.senderAddress.street} />
+                        <input {...register("senderAddress.street", { required: "This filed is required" })}  />
                         <p>{errors.senderAddress?.street?.message}</p>
                     </label>
 
@@ -97,12 +112,12 @@ export function EditInvoice(): JSX.Element {
                         <div className="city-and-post-container">
 
                             <label htmlFor="" className="city">City
-                                <input type="text" {...register("senderAddress.city", { required: "This filed is required" })} value={invoiceToUpdate?.senderAddress.city} />
+                                <input type="text" {...register("senderAddress.city", { required: "This filed is required" })}  />
                                 <p>{errors.senderAddress?.city?.message}</p>
                             </label>
 
                             <label htmlFor="" className="post-code">Post Code
-                                <input type="text" {...register("senderAddress.postCode", { required: "This filed is required" })} value={invoiceToUpdate?.senderAddress.postCode} />
+                                <input type="text" {...register("senderAddress.postCode", { required: "This filed is required" })} />
                                 <p>{errors.senderAddress?.postCode?.message}</p>
                             </label>
 
@@ -110,7 +125,7 @@ export function EditInvoice(): JSX.Element {
 
                         <label htmlFor="" className="country">Country
 
-                            <input {...register("senderAddress.country", { required: "This filed is required" })} value={invoiceToUpdate?.senderAddress.country} />
+                            <input {...register("senderAddress.country", { required: "This filed is required" })} />
                             <p>{errors.senderAddress?.country?.message}</p>
                         </label>
 
@@ -123,19 +138,19 @@ export function EditInvoice(): JSX.Element {
                     <p className="bill-to headline">Bill To</p>
 
                     <label htmlFor="" className="client-name">Client's Name
-                        <input {...register("clientName", { required: "This filed is required" })} value={invoiceToUpdate?.clientName} />
+                        <input {...register("clientName", { required: "This filed is required" })} />
                         <p>{errors.clientName?.message}</p>
 
                     </label>
 
                     <label htmlFor="" className="client-email">Client's Email
-                        <input {...register("clientEmail", { required: "This filed is required" })} value={invoiceToUpdate?.clientEmail} />
+                        <input {...register("clientEmail", { required: "This filed is required" })}  />
                         <p>{errors.clientEmail?.message}</p>
 
                     </label>
 
                     <label htmlFor="" className="street-address">Street Address
-                        <input {...register("clientAddress.street", { required: "This filed is required" })} value={invoiceToUpdate?.clientAddress.street} />
+                        <input {...register("clientAddress.street", { required: "This filed is required" })} />
                         <p>{errors.senderAddress?.street?.message}</p>
                     </label>
 
@@ -144,13 +159,13 @@ export function EditInvoice(): JSX.Element {
                         <div className="city-and-post-container">
 
                             <label htmlFor="" className="city">City
-                                <input {...register("clientAddress.city", { required: "This filed is required" })} value={invoiceToUpdate?.clientAddress.city} />
+                                <input {...register("clientAddress.city", { required: "This filed is required" })} />
                                 <p>{errors.clientAddress?.city?.message}</p>
 
                             </label>
 
                             <label htmlFor="" className="post-code">Post Code
-                                <input {...register("clientAddress.postCode", { required: "This filed is required" })} value={invoiceToUpdate?.clientAddress.postCode} />
+                                <input {...register("clientAddress.postCode", { required: "This filed is required" })}  />
                                 <p>{errors.clientAddress?.postCode?.message}</p>
 
                             </label>
@@ -158,7 +173,7 @@ export function EditInvoice(): JSX.Element {
                         </div>
 
                         <label htmlFor="" className="country">Country
-                            <input {...register("clientAddress.country", { required: "This filed is required" })} value={invoiceToUpdate?.clientAddress.country} />
+                            <input {...register("clientAddress.country", { required: "This filed is required" })} />
                             <p>{errors.clientAddress?.country?.message}</p>
 
                         </label>
@@ -170,7 +185,7 @@ export function EditInvoice(): JSX.Element {
                         <div className="invoice-date-container">
 
                             <label htmlFor="" className="invoice-date">Invoice Date
-                                <input {...register("createdAt", { required: "This filed is required" })} value={invoiceToUpdate?.paymentDue} />
+                                <input {...register("createdAt", { required: "This filed is required" })}  />
                                 <p>{errors.createdAt?.message}</p>
 
                             </label>
@@ -187,7 +202,7 @@ export function EditInvoice(): JSX.Element {
                         </div>
 
                         <label htmlFor="" className="project-name">Project Description
-                            <input {...register("description", { required: "This filed is required" })} value={invoiceToUpdate?.description} />
+                            <input {...register("description", { required: "This filed is required" })}/>
                             <p>{errors.description?.message}</p>
 
                         </label>
