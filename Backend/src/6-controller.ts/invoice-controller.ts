@@ -28,7 +28,6 @@ router.get("/api/invoices/:invoiceId", async (request: Request, response: Respon
 
 router.post("/api/invoices/add-invoice", async (request: Request, response: Response, next: NextFunction) => {
     try {
-        console.log(request.body)
         const invoice = new InvoiceModel(request.body)
         await invoiceLogic.addInvoice(invoice)
         response.status(201).json({ message: "Invoice added successfully", invoice })
@@ -54,25 +53,21 @@ router.delete("/api/invoices/delete-invoice/:invoiceId", async (request: Request
 })
 
 router.put("/api/invoices/update-invoice/:invoiceId", async (request: Request, response: Response, next: NextFunction) => {
-
     try {
+        const invoiceId = request.params.invoiceId;
+        const updatedInvoiceData = request.body; // Get the updated invoice data from the request body
 
-        const invoiceId = request.params.invoiceId
-
-        const updatedInvoice = await invoiceLogic.updateInvoice(invoiceId)
+        // Update the invoice using the ID and the updated data
+        const updatedInvoice = await invoiceLogic.updateInvoice(invoiceId, updatedInvoiceData);
 
         return response.status(200).json({
-            message: 'Invoice updated successfully', updatedInvoice
+            message: 'Invoice updated successfully',
+            updatedInvoice
         });
-
     } catch (error) {
-
+        console.error("Error updating invoice:", error);
         return response.status(400).json({ message: error.message });
-
     }
+});
 
-
-
-
-})
 export default router

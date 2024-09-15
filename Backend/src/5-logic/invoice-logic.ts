@@ -49,7 +49,7 @@ async function deleteInvoiceId(id: string): Promise<InvoiceModel> {
 
 }
 
-async function updateInvoice(id: string): Promise<InvoiceModel> {
+async function updateInvoice(id: string, updatedInvoiceData: InvoiceModel): Promise<InvoiceModel> {
 
     const currentInvoicesList = await dal.getJsonData();
 
@@ -74,5 +74,6 @@ export default {
     getAllData,
     addInvoice,
     deleteInvoiceId,
-    updateInvoice, getChosenInvoice
+    updateInvoice,
+    getChosenInvoice
 }

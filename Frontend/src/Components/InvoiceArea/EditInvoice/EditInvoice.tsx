@@ -1,7 +1,7 @@
 import "./EditInvoice.css"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faTrash } from "@fortawesome/free-solid-svg-icons"
-import { useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import dataService from "../../../services/InvoicesService";
 import InvoiceModel from "../../../model/InvoiceModel";
@@ -9,32 +9,48 @@ import { Controller, useFieldArray, useForm } from "react-hook-form";
 
 export function EditInvoice(): JSX.Element {
 
-    const [invoiceToUpdate, setInvoiceToUpdate] = useState<InvoiceModel>()
-
+    const navigate = useNavigate()
+    const [invoiceToUpdate, setInvoiceToUpdate] = useState<InvoiceModel>({
+        id: "", // Default empty string
+        createdAt: "",
+        paymentDue: "",
+        description: "",
+        paymentTerms: "",
+        clientName: "",
+        clientEmail: "",
+        status: "", // Default empty string or a valid status
+        senderAddress: { street: "", city: "", postCode: 0, country: "" },
+        clientAddress: { street: "", city: "", postCode: 0, country: "" },
+        items: [],
+        total: 0 // Default empty string, could be "0" if you want to use a number
+    });
     const [totals, setTotals] = useState<number[]>([0]);
 
     const [valueChanged, setValueChanged] = useState(false)
 
     const { invoiceId } = useParams<{ invoiceId?: string }>();
 
-    useEffect(() => {
-
-        if (invoiceId) {
-
-            dataService.getSingleInvoice(invoiceId)
-                .then(data => setInvoiceToUpdate(data))
-                .catch(err => console.log(err))
-        }
-
-    }, [])
-    
     const {
         register,
         handleSubmit,
+        reset,
         control,
         formState: { errors },
         watch
     } = useForm<InvoiceModel>({ defaultValues: { items: [{ name: '', quantity: 1, price: 0 }] } })
+
+    useEffect(() => {
+        if (invoiceId) {
+
+            dataService.getSingleInvoice(invoiceId)
+                .then(data => {
+                    setInvoiceToUpdate(data)
+                    reset(data)
+                })
+                .catch(err => console.log(err))
+        }
+
+    }, [invoiceId, reset])
 
     const { fields, append, remove } = useFieldArray({ control, name: "items" });
 
@@ -50,6 +66,8 @@ export function EditInvoice(): JSX.Element {
         try {
 
             await dataService.addInvoice(newInvoiceData)
+            alert("Invoice has been updated successfully")
+            navigate("/")
 
         } catch (error: any) {
             alert(error.message);
@@ -57,11 +75,12 @@ export function EditInvoice(): JSX.Element {
 
     }
 
+
     return (
         <div className="AddInvoice">
 
             <div className="new-invoice-head">
-                <p>New Invoice</p>
+                <p>Edit #{invoiceToUpdate?.id}</p>
             </div>
 
             <form onSubmit={handleSubmit(onSubmit)}>
@@ -69,7 +88,7 @@ export function EditInvoice(): JSX.Element {
                     <p className="bill-from headline">Bill From</p>
 
                     <label htmlFor="" className="street">Street Address
-                        <input {...register("senderAddress.street", { required: "This filed is required" })} />
+                        <input {...register("senderAddress.street", { required: "This filed is required" })} value={invoiceToUpdate?.senderAddress.street} />
                         <p>{errors.senderAddress?.street?.message}</p>
                     </label>
 
@@ -78,12 +97,12 @@ export function EditInvoice(): JSX.Element {
                         <div className="city-and-post-container">
 
                             <label htmlFor="" className="city">City
-                                <input type="text" {...register("senderAddress.city", { required: "This filed is required" })} />
+                                <input type="text" {...register("senderAddress.city", { required: "This filed is required" })} value={invoiceToUpdate?.senderAddress.city} />
                                 <p>{errors.senderAddress?.city?.message}</p>
                             </label>
 
                             <label htmlFor="" className="post-code">Post Code
-                                <input type="text" {...register("senderAddress.postCode", { required: "This filed is required" })} />
+                                <input type="text" {...register("senderAddress.postCode", { required: "This filed is required" })} value={invoiceToUpdate?.senderAddress.postCode} />
                                 <p>{errors.senderAddress?.postCode?.message}</p>
                             </label>
 
@@ -91,7 +110,7 @@ export function EditInvoice(): JSX.Element {
 
                         <label htmlFor="" className="country">Country
 
-                            <input {...register("senderAddress.country", { required: "This filed is required" })} />
+                            <input {...register("senderAddress.country", { required: "This filed is required" })} value={invoiceToUpdate?.senderAddress.country} />
                             <p>{errors.senderAddress?.country?.message}</p>
                         </label>
 
@@ -104,19 +123,19 @@ export function EditInvoice(): JSX.Element {
                     <p className="bill-to headline">Bill To</p>
 
                     <label htmlFor="" className="client-name">Client's Name
-                        <input {...register("clientName", { required: "This filed is required" })} />
+                        <input {...register("clientName", { required: "This filed is required" })} value={invoiceToUpdate?.clientName} />
                         <p>{errors.clientName?.message}</p>
 
                     </label>
 
                     <label htmlFor="" className="client-email">Client's Email
-                        <input {...register("clientEmail", { required: "This filed is required" })} />
+                        <input {...register("clientEmail", { required: "This filed is required" })} value={invoiceToUpdate?.clientEmail} />
                         <p>{errors.clientEmail?.message}</p>
 
                     </label>
 
                     <label htmlFor="" className="street-address">Street Address
-                        <input {...register("clientAddress.street", { required: "This filed is required" })} />
+                        <input {...register("clientAddress.street", { required: "This filed is required" })} value={invoiceToUpdate?.clientAddress.street} />
                         <p>{errors.senderAddress?.street?.message}</p>
                     </label>
 
@@ -125,13 +144,13 @@ export function EditInvoice(): JSX.Element {
                         <div className="city-and-post-container">
 
                             <label htmlFor="" className="city">City
-                                <input {...register("clientAddress.city", { required: "This filed is required" })} />
+                                <input {...register("clientAddress.city", { required: "This filed is required" })} value={invoiceToUpdate?.clientAddress.city} />
                                 <p>{errors.clientAddress?.city?.message}</p>
 
                             </label>
 
                             <label htmlFor="" className="post-code">Post Code
-                                <input {...register("clientAddress.postCode", { required: "This filed is required" })} />
+                                <input {...register("clientAddress.postCode", { required: "This filed is required" })} value={invoiceToUpdate?.clientAddress.postCode} />
                                 <p>{errors.clientAddress?.postCode?.message}</p>
 
                             </label>
@@ -139,7 +158,7 @@ export function EditInvoice(): JSX.Element {
                         </div>
 
                         <label htmlFor="" className="country">Country
-                            <input {...register("clientAddress.country", { required: "This filed is required" })} />
+                            <input {...register("clientAddress.country", { required: "This filed is required" })} value={invoiceToUpdate?.clientAddress.country} />
                             <p>{errors.clientAddress?.country?.message}</p>
 
                         </label>
@@ -151,7 +170,7 @@ export function EditInvoice(): JSX.Element {
                         <div className="invoice-date-container">
 
                             <label htmlFor="" className="invoice-date">Invoice Date
-                                <input {...register("createdAt", { required: "This filed is required" })} />
+                                <input {...register("createdAt", { required: "This filed is required" })} value={invoiceToUpdate?.paymentDue} />
                                 <p>{errors.createdAt?.message}</p>
 
                             </label>
@@ -168,7 +187,7 @@ export function EditInvoice(): JSX.Element {
                         </div>
 
                         <label htmlFor="" className="project-name">Project Description
-                            <input {...register("description", { required: "This filed is required" })} />
+                            <input {...register("description", { required: "This filed is required" })} value={invoiceToUpdate?.description} />
                             <p>{errors.description?.message}</p>
 
                         </label>
@@ -260,9 +279,8 @@ export function EditInvoice(): JSX.Element {
                 </div>
 
                 <div className="new-buttons-container">
-                    <button className="discard-btn">Discard</button>
-                    <button className="draft-btn">Save as Draft</button>
-                    <input type="submit" className="save-btn" value="Save & Send" />
+                    <button className="discard-btn">Cancel</button>
+                    <input type="submit" className="save-btn" value="Save Changes" />
                 </div>
 
             </form>

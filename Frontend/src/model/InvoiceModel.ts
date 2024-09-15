@@ -10,7 +10,7 @@ class InvoiceModel {
     senderAddress: {
         street: string;
         city: string;
-        postCode: string;
+        postCode: number;
         country: string;
     };
     clientAddress: {
@@ -26,7 +26,7 @@ class InvoiceModel {
         // total: number;
     }[];
     
-    total: string;
+    total: number;
 }
 
 export default InvoiceModel;
