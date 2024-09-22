@@ -78,9 +78,9 @@ export function EditInvoice(): JSX.Element {
     }, [items, valueChanged]);
 
     const onSubmit = async (newInvoiceData: InvoiceModel) => {
-        try {
 
-            await dataService.addInvoice(newInvoiceData)
+        try {
+            await dataService.updateInvoice(newInvoiceData)
             alert("Invoice has been updated successfully")
             navigate("/")
 
@@ -294,7 +294,7 @@ export function EditInvoice(): JSX.Element {
                 </div>
 
                 <div className="new-buttons-container">
-                    <button className="discard-btn">Cancel</button>
+                    <button className="discard-btn" onClick={() => navigate("/")}>Cancel</button>
                     <input type="submit" className="save-btn" value="Save Changes" />
                 </div>
 

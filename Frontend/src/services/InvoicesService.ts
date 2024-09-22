@@ -5,7 +5,7 @@ import appConfig from "../Utils/Config"
 class InvoicesService {
 
     public async getAllData(): Promise<InvoiceModel[]> {
-
+        
         const response = await axios.get<InvoiceModel[]>(appConfig.invoicesUrl)
         const invoices = response.data
         return invoices;
@@ -28,10 +28,22 @@ class InvoicesService {
 
     }
 
+    public async changeStatusToPaid(id: string) {
+
+        try {
+            await axios.put<InvoiceModel>(`${appConfig.invoicesUrl}update-invoice-status/${id}`);
+
+        } catch (error) {
+            console.error("Error updating invoice:", error);
+            throw error;
+        }
+
+    }
+
     public async updateInvoice(invoice: InvoiceModel): Promise<void> {
 
         try {
-            await axios.put<InvoiceModel>(`${appConfig.invoicesUrl}${invoice.id}`, invoice);
+            await axios.put<InvoiceModel>(`${appConfig.invoicesUrl}update-invoice/${invoice.id}`, invoice);
         }
         catch (error) {
             console.error("Error updating invoice:", error);
@@ -40,14 +52,18 @@ class InvoicesService {
     }
 
     public async deleteInvoice(id: string): Promise<void> {
+        try {
+            await axios.delete(`${appConfig.invoicesUrl}delete-invoice/${id}`)
+            alert('Invoice has been deleted successfully');
+        }
 
-        await axios.delete(`${appConfig.invoicesUrl}delete-invoice/${id}`)
+        catch (error: any) {
+            console.error('Error deleting invoice:', error);
+            alert('Failed to delete the invoice');
+        }
+
     }
 
-    public async markAsPaid(id: string): Promise<void> {
-
-        await axios.put(`${appConfig.invoicesUrl}update-invoice/${id}`)
-    }
 
 }
 

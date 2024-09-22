@@ -3,6 +3,7 @@ import { InvoiceCard } from "../../InvoiceArea/InvoiceCard/InvoiceCard"
 import { useEffect, useState } from "react";
 import InvoiceModel from "../../../model/InvoiceModel";
 import dataService from "../../../services/InvoicesService";
+import { EmptyInvoicesList } from "../../InvoiceArea/NoInvoices/NoInvoices";
 
 interface MainProps {
     filters: any;
@@ -11,13 +12,13 @@ interface MainProps {
 
 export function Main(props: MainProps): JSX.Element {
 
+    const [invoicesDataArray, setInvoicesDataArray] = useState<InvoiceModel[]>()
     useEffect(() => {
         dataService.getAllData()
             .then(data => setInvoicesDataArray(data))
             .catch(err => alert(err.message))
     }, [])
 
-    const [invoicesDataArray, setInvoicesDataArray] = useState<InvoiceModel[]>()
 
     // Get the active filters if there are there
     const activeFilters = Object.entries(props.filters).filter(([k, v]) => {
@@ -42,7 +43,7 @@ export function Main(props: MainProps): JSX.Element {
 
     return (
         <div className="Main">
-
+            {filterInvoicesDataArray?.length === 0 ? <EmptyInvoicesList /> : ""}
             <div className="invoices-container">
                 {filterInvoicesDataArray && filterInvoicesDataArray.map((invoice, index) =>
                 (<InvoiceCard key={index}
@@ -60,5 +61,3 @@ export function Main(props: MainProps): JSX.Element {
         </div >
     )
 }
-
-

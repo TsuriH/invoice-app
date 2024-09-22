@@ -47,6 +47,7 @@ export function InvoiceDetails(): JSX.Element {
     }
 
     const deleteInvoice = async (id: string) => {
+        
         //go to the server and delete this invoice        
         await dataService.deleteInvoice(id)
         // fetch back 
@@ -67,7 +68,7 @@ export function InvoiceDetails(): JSX.Element {
 
         } else {
 
-            await dataService.markAsPaid(id)
+            await dataService.changeStatusToPaid(id)
 
             const updatedInvoicesList = await dataService.getAllData()
 

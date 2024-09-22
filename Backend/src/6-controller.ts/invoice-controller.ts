@@ -1,7 +1,6 @@
 import express, { NextFunction, Request, Response } from "express"
 import invoiceLogic from "../5-logic/invoice-logic"
 import InvoiceModel from "../4-models/invoice-model"
-import { log } from "console"
 
 const router = express.Router()
 
@@ -43,7 +42,6 @@ router.delete("/api/invoices/delete-invoice/:invoiceId", async (request: Request
     const deletedInvoice = await invoiceLogic.deleteInvoiceId(invoiceId)
 
     if (!deletedInvoice) {
-
         return response.status(404).json({ message: 'Invoice not found' });
 
     }
@@ -54,9 +52,12 @@ router.delete("/api/invoices/delete-invoice/:invoiceId", async (request: Request
 
 router.put("/api/invoices/update-invoice/:invoiceId", async (request: Request, response: Response, next: NextFunction) => {
     try {
-        const invoiceId = request.params.invoiceId;
-        const updatedInvoiceData = request.body; // Get the updated invoice data from the request body
 
+        const invoiceId = request.params.invoiceId;
+
+        const updatedInvoiceData = request.body; // Get the updated invoice data from the request body
+        console.log(invoiceId)
+        console.log(updatedInvoiceData)
         // Update the invoice using the ID and the updated data
         const updatedInvoice = await invoiceLogic.updateInvoice(invoiceId, updatedInvoiceData);
 
@@ -69,5 +70,24 @@ router.put("/api/invoices/update-invoice/:invoiceId", async (request: Request, r
         return response.status(400).json({ message: error.message });
     }
 });
+
+router.put("/api/invoices/update-invoice-status/:invoiceId", async (request: Request, response: Response, next: NextFunction) => {
+    try {
+        
+        const invoiceId = request.params.invoiceId;
+
+        // Update the invoice using the ID and the updated data
+        await invoiceLogic.changeStatusToPaid(invoiceId);
+
+        return response.status(200).json({
+            message: 'Invoice updated successfully',
+        });
+
+    } catch (error) {
+        console.error("Error updating invoice status:", error);
+        return response.status(400).json({ message: error.message });
+    }
+});
+
 
 export default router

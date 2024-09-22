@@ -31,13 +31,13 @@ async function addInvoice(invoice: InvoiceModel): Promise<void> {
 
 }
 
-async function deleteInvoiceId(id: string): Promise<InvoiceModel> {
+async function deleteInvoiceId(id: string): Promise<boolean> {
 
     const currentInvoicesList = await dal.getJsonData();
 
     const indexToBeDeleted = currentInvoicesList.findIndex(invoice => invoice.id === id)
 
-    if (indexToBeDeleted) {
+    if (currentInvoicesList[indexToBeDeleted]) {
 
         currentInvoicesList.splice(indexToBeDeleted, 1)
 
@@ -45,11 +45,34 @@ async function deleteInvoiceId(id: string): Promise<InvoiceModel> {
 
     }
 
-    return currentInvoicesList[indexToBeDeleted]
-
+    return true
 }
 
-async function updateInvoice(id: string, updatedInvoiceData: InvoiceModel): Promise<InvoiceModel> {
+async function updateInvoice
+    (id: string, updatedInvoiceData: InvoiceModel): Promise<InvoiceModel> {
+
+    console.log(id)
+
+    const currentInvoicesList = await dal.getJsonData();
+
+    const indexInvoiceToUpdate = currentInvoicesList.findIndex(invoice => invoice.id === id);
+
+    if (indexInvoiceToUpdate === -1) {
+        throw new Error("Invoice not found"); // Handle invoice not found
+    }
+
+    if (currentInvoicesList[indexInvoiceToUpdate].status === "paid") {
+        throw new Error("Invoice is already marked as paid"); // Handle already paid invoice
+    }
+
+    currentInvoicesList[indexInvoiceToUpdate] = updatedInvoiceData
+
+    await dal.saveDataToJson(currentInvoicesList);
+
+    return currentInvoicesList[indexInvoiceToUpdate]
+}
+
+async function changeStatusToPaid(id: string): Promise<void> {
 
     const currentInvoicesList = await dal.getJsonData();
 
@@ -67,13 +90,14 @@ async function updateInvoice(id: string, updatedInvoiceData: InvoiceModel): Prom
 
     await dal.saveDataToJson(currentInvoicesList);
 
-    return currentInvoicesList[indexInvoiceToUpdate]
 }
+
 
 export default {
     getAllData,
     addInvoice,
     deleteInvoiceId,
     updateInvoice,
-    getChosenInvoice
+    getChosenInvoice,
+    changeStatusToPaid
 }
